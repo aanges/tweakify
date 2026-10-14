@@ -61,8 +61,15 @@ git add .
 git commit -m "Tweakify landing page"
 gh auth login                 # logowanie w przeglądarce, bez wklejania tokenu
 gh repo create tweakify --public --source=. --push
-gh api -X POST repos/:owner/:repo/pages -f source[branch]=main -f source[path]=/ 2>$null
+gh api -X POST repos/:owner/:repo/pages \
+  --input '{"source":{"branch":"main","path":"/"}}'
 ```
+
+Jeśli `gh` zwróci błąd, Pages i tak włączy się w UI:
+`Settings → Pages → Source: main / (root) → Save`.
+
+Uwaga na PowerShell: `gh api` z `--input` działa w obu powłokach, ale wielolinijkowe
+polecenie z `\` wymaga albo git-bash/WSL, albo wpisania w jednej linii.
 
 Opcja C — Netlify / Vercel:
 
