@@ -452,6 +452,33 @@ html.js-scroll-focus{scroll-behavior:smooth}
 .ticks--hl::before{content:"♾"}
 .price-note{text-align:center;margin-top:34px;color:var(--dim);font-size:.87rem}
 
+/* ---------- Metody płatności ---------- */
+.pay{
+  margin-top:32px;padding:26px 26px 24px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+}
+.pay__lead{display:flex;align-items:flex-start;gap:13px;font-size:.95rem;color:var(--muted);line-height:1.6;margin-bottom:18px}
+.pay__lead b{color:var(--text);font-weight:600}
+.pay__ico{
+  flex:none;display:grid;place-items:center;width:36px;height:36px;font-size:1.05rem;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);border-radius:10px;
+}
+.pay__list{display:flex;flex-wrap:wrap;gap:9px}
+.pay__list li{
+  font-family:var(--font-m);font-size:.83rem;color:#d4d9ea;
+  padding:8px 14px;border-radius:10px;
+  background:rgba(255,255,255,.035);border:1px solid var(--line-2);
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.pay__list li:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.1);transform:translateY(-1px)}
+.pay__note{margin-top:18px;font-size:.82rem;color:var(--dim);line-height:1.55}
+@media (max-width:620px){
+  .pay{padding:20px 18px}
+  .pay__lead{font-size:.9rem}
+  .pay__list{gap:7px}
+  .pay__list li{font-size:.78rem;padding:7px 11px}
+}
+
 /* ---------- Steps ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
 .step{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 24px;transition:border-color .25s,transform .25s}
