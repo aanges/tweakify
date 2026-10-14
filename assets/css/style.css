@@ -286,9 +286,8 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .anchor__head p{color:var(--muted);font-size:.94rem;max-width:70ch}
 .anchor__rows{display:grid;gap:14px;margin:28px 0 24px}
 .anchor__row{display:grid;grid-template-columns:minmax(150px,1.05fr) 1fr;align-items:center;gap:18px}
-/* Tor jest ZAWSZE tej samej dlugosci, wypelnienie rosnie proporcjonalnie do ceny.
-   Cena stoi w osobnej kolumnie poza torem - inaczej przy 8% szerokosci
-   tekst "40 zl" nie miescilby sie wypelnieniu i bylby uciety. */
+/* Hierarchia: konkurencja pelna + wyrozniona glow, Tweakify krotsze.
+   Wspolna dlugosc toru = uczciwe porownanie, wypelnienie = skala ceny. */
 .anchor__row{display:grid;grid-template-columns:minmax(150px,1fr) 1.5fr auto;align-items:center;gap:18px}
 .anchor__track{
   position:relative;height:22px;border-radius:7px;
@@ -296,16 +295,22 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 }
 .anchor__track i{
   position:absolute;top:0;bottom:0;left:0;
-  width:var(--p,100%);min-width:16px;border-radius:6px;
+  width:var(--p,100%);min-width:22px;border-radius:6px;
   background:var(--grad);
   transition:width .5s cubic-bezier(.2,.8,.25,1);
 }
-.anchor__track--bad i{background:linear-gradient(90deg,#e04a4a,#f87171)}
+/* konkurencja - pelna szerokosc, wieksza wysokosc i poswiata = dominuje wizualnie */
+.anchor__track--bad{height:30px;border-color:rgba(248,113,113,.35)}
+.anchor__track--bad i{
+  background:linear-gradient(90deg,#e04a4a,#f87171);
+  box-shadow:0 0 16px rgba(248,113,113,.45);
+}
+.anchor__track--good i{background:linear-gradient(90deg,#00c97a,#6ee7b7);box-shadow:0 0 12px rgba(0,229,143,.4)}
 .anchor__in{
   font-family:var(--font-d);font-weight:700;font-size:1.05rem;
   letter-spacing:-.01em;color:var(--text);white-space:nowrap;min-width:88px;text-align:right;
 }
-.anchor__in--bad{color:#fca5a5}
+.anchor__in--bad{color:#fca5a5;font-size:1.15rem}
 .anchor__in--good{color:var(--green-2)}
 .anchor__name{font-size:.9rem;color:var(--muted)}
 .anchor__brand{
