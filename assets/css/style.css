@@ -268,7 +268,7 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .anchor{padding:28px 24px}
 .anchor__row{grid-template-columns:1fr;gap:7px}
-.anchor__row .anchor__price{font-size:.95rem}
+.anchor__row .anchor__in{font-size:.86rem}
 .anchor__row--us{order:-1}
 .feat{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:24px 21px;transition:border-color .25s,transform .25s,background .25s}
 .feat:hover{border-color:rgba(139,92,246,.45);transform:translateY(-4px);background:var(--surface-2)}
@@ -284,7 +284,19 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .anchor__head h3{font-family:var(--font-d);font-size:1.32rem;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
 .anchor__head p{color:var(--muted);font-size:.94rem;max-width:70ch}
 .anchor__rows{display:grid;gap:14px;margin:28px 0 24px}
-.anchor__row{display:grid;grid-template-columns:minmax(150px,1.3fr) 1fr auto;align-items:center;gap:18px}
+.anchor__row{display:grid;grid-template-columns:minmax(150px,1.05fr) 1fr;align-items:center;gap:18px}
+/* pasek: jednakowa dlugosc, cena siedzi WEWNATRZ - dzieki temu wszystkie
+   rzedy wygladaja identycznie, a roznice cen czyta sie z jednego miejsca */
+.anchor__bar{
+  position:relative;height:38px;border-radius:99px;
+  display:grid;place-items:center;overflow:hidden;
+  border:1px solid var(--line);background:rgba(255,255,255,.05);
+}
+.anchor__bar i{position:absolute;inset:0;width:100%;height:100%;border-radius:99px}
+.anchor__in{
+  position:relative;z-index:1;font-family:var(--font-d);font-weight:700;
+  font-size:.92rem;letter-spacing:-.01em;color:#0a0713;
+}
 .anchor__name{font-size:.9rem;color:var(--muted)}
 .anchor__brand{
   font-family:var(--font-d);font-weight:700;font-size:.86rem;letter-spacing:.01em;
@@ -296,12 +308,10 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .anchor__row--us .anchor__brand{color:var(--green-2);-webkit-text-fill-color:var(--green-2);background:none}
 .anchor__bar{height:12px;border-radius:99px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid var(--line)}
 .anchor__bar i{display:block;height:100%;width:100%;border-radius:99px}
-.anchor__bar--bad i{background:linear-gradient(90deg,#7f1d1d,#f87171)}
-.anchor__bar--mid i{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
-.anchor__bar--good i{background:linear-gradient(90deg,#00e58f,#6ee7b7);box-shadow:0 0 14px rgba(0,229,143,.55)}
-.anchor__price{font-family:var(--font-d);font-weight:700;font-size:1.05rem;letter-spacing:-.02em;white-space:nowrap}
-.anchor__price--bad{color:var(--red)}
-.anchor__price--good{color:var(--green-2)}
+/* jasne konce pod ciemny tekst ceny - kontrast >= 7.2:1 na kazdym pasku (WCAG AA) */
+.anchor__bar--bad i{background:linear-gradient(90deg,#f87171,#fca5a5)}
+.anchor__bar--mid i{background:linear-gradient(90deg,#a78bfa,#c4b5fd)}
+.anchor__bar--good i{background:linear-gradient(90deg,#34d399,#6ee7b7)}
 .anchor__note{font-size:.89rem;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
 .anchor__note b{color:var(--text)}
 
@@ -427,15 +437,24 @@ html.js-scroll-focus{scroll-behavior:smooth}
 }
 .price:hover{transform:translateY(-6px);border-color:var(--line-2)}
 .price--hot{
-  background:linear-gradient(170deg,rgba(139,92,246,.1),var(--surface) 55%);
-  border-color:rgba(139,92,246,.55);box-shadow:var(--glow-v);
+  background:linear-gradient(170deg,rgba(245,158,11,.13),var(--surface) 55%);
+  border-color:rgba(245,158,11,.45);
+  box-shadow:0 0 50px -14px rgba(245,158,11,.5);
 }
-.price--hot:hover{box-shadow:0 0 60px -10px rgba(139,92,246,.85)}
+.price--hot:hover{box-shadow:0 0 66px -10px rgba(245,158,11,.8)}
 .ribbon{
   position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-  background:var(--grad);color:#0a0713;font-family:var(--font-d);font-weight:700;font-size:.71rem;
-  padding:5px 16px;border-radius:99px;white-space:nowrap;letter-spacing:.03em;box-shadow:0 8px 22px -8px rgba(139,92,246,.9);
+  background:linear-gradient(100deg,#fde68a,#f59e0b);
+  color:#251700;font-family:var(--font-d);font-weight:700;font-size:.71rem;
+  padding:5px 16px;border-radius:99px;white-space:nowrap;letter-spacing:.03em;
+  box-shadow:0 8px 22px -8px rgba(245,158,11,.9);
 }
+/* All-In-One dostaje wlasna palete - zlota zamiast brandowego fiolet-zielen,
+   zeby flaszowy pakiet odcinal sie od trzech pozostalych kart */
+.price--hot .price__num b{background:linear-gradient(120deg,#fde68a,#f59e0b);-webkit-background-clip:text;background-clip:text;color:transparent}
+.price--hot .btn--primary{background:linear-gradient(120deg,#fbbf24,#f59e0b);color:#251700;box-shadow:0 8px 26px -8px rgba(245,158,11,.85)}
+.price--hot .btn--primary:hover{box-shadow:0 14px 34px -8px rgba(245,158,11,1)}
+.price--hot .ticks--hl{color:#fbbf24!important}
 .price__head{margin-bottom:18px}
 .price__head h3{font-family:var(--font-d);font-size:1.32rem;font-weight:600;letter-spacing:-.025em}
 .price__sub{font-size:.79rem;color:var(--dim);font-family:var(--font-m)}
@@ -552,7 +571,7 @@ html.js-scroll-focus{scroll-behavior:smooth}
   .console{max-width:560px}
   .price-grid{grid-template-columns:repeat(2,1fr);max-width:840px;margin-inline:auto}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
-  .anchor__row{grid-template-columns:minmax(130px,1.2fr) 1fr auto}
+  .anchor__row{grid-template-columns:minmax(130px,1.2fr) 1fr}
   .steps{grid-template-columns:repeat(2,1fr)}
   .step::after{content:""}
   .footer__in{grid-template-columns:1fr 1fr;gap:34px}
