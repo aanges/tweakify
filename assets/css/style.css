@@ -115,7 +115,11 @@ ul,ol{list-style:none}
 .nav.is-stuck{border-bottom-color:var(--line);background:rgba(6,7,12,.92)}
 .nav__in{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-d);font-weight:700;font-size:1.28rem;letter-spacing:-.02em}
-.logo__img{width:34px;height:34px;flex:none;display:block;border-radius:9px}
+.logo__accent{
+  width:4px;height:21px;flex:none;border-radius:99px;
+  background:linear-gradient(180deg,#a78bfa 0%,#8b5cf6 45%,#00e58f 100%);
+  box-shadow:0 0 9px rgba(139,92,246,.8),0 0 9px rgba(0,229,143,.45);
+}
 .menu{display:flex;align-items:center;gap:30px;font-size:.94rem;color:var(--muted)}
 .menu a{transition:color .2s}
 .menu a:not(.btn):hover{color:var(--text)}
