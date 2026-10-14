@@ -268,8 +268,7 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .anchor{padding:28px 24px}
 .anchor__row{grid-template-columns:1fr;gap:7px}
-.anchor__row .anchor__in{font-size:.86rem}
-.anchor__row--us{order:-1}
+.anchor__in{font-size:.98rem}
 .feat{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:24px 21px;transition:border-color .25s,transform .25s,background .25s}
 .feat:hover{border-color:rgba(139,92,246,.45);transform:translateY(-4px);background:var(--surface-2)}
 .feat__ico{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:11px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.28);font-size:1.2rem;margin-bottom:15px}
@@ -288,14 +287,16 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 /* pasek: jednakowa dlugosc, cena siedzi WEWNATRZ - dzieki temu wszystkie
    rzedy wygladaja identycznie, a roznice cen czyta sie z jednego miejsca */
 .anchor__bar{
-  position:relative;height:38px;border-radius:99px;
-  display:grid;place-items:center;overflow:hidden;
-  border:1px solid var(--line);background:rgba(255,255,255,.05);
+  position:relative;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.05);
 }
-.anchor__bar i{position:absolute;inset:0;width:100%;height:100%;border-radius:99px}
+.anchor__bar i{position:absolute;inset:0;width:100%;height:100%;border-radius:12px}
 .anchor__in{
-  position:relative;z-index:1;font-family:var(--font-d);font-weight:700;
-  font-size:.92rem;letter-spacing:-.01em;color:#0a0713;
+  position:relative;z-index:1;
+  font-family:var(--font-d);font-weight:700;
+  font-size:1.05rem;line-height:1;letter-spacing:0;
+  color:#0a0713;white-space:nowrap;
 }
 .anchor__name{font-size:.9rem;color:var(--muted)}
 .anchor__brand{
@@ -308,7 +309,6 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .anchor__row--us .anchor__brand{color:var(--green-2);-webkit-text-fill-color:var(--green-2);background:none}
 .anchor__bar{height:12px;border-radius:99px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid var(--line)}
 .anchor__bar i{display:block;height:100%;width:100%;border-radius:99px}
-/* jasne konce pod ciemny tekst ceny - kontrast >= 7.2:1 na kazdym pasku (WCAG AA) */
 .anchor__bar--bad i{background:linear-gradient(90deg,#f87171,#fca5a5)}
 .anchor__bar--mid i{background:linear-gradient(90deg,#a78bfa,#c4b5fd)}
 .anchor__bar--good i{background:linear-gradient(90deg,#34d399,#6ee7b7)}

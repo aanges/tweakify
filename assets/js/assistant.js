@@ -58,7 +58,11 @@
         { label: 'Płynnie, ale za mało klatek', value: 'fps_low',
           answer: 'Klasyczny przypadek „mocy". Zaczynamy od planu zasilania — najczęściej to jedna zmiana, która robi największą różnicę.' },
         { label: 'Gram w 240 Hz, liczy się każda klatka', value: 'fps_comp',
-          answer: 'Przy takich wymaganiach liczy się 1% low, nie średnia. Dlatego robimy podkręcenie pod Twoje podzespoły, a nie tylko czyszczenie.' }
+          answer: 'Przy takich wymaganiach liczy się 1% low, nie średnia. Dlatego robimy podkręcenie pod Twoje podzespoły, a nie tylko czyszczenie.' },
+        { label: 'Fps spada w trakcie meczu', value: 'fps_drop_ingame',
+          answer: 'Spadek w trakcie meczu to najczęściej przegrzewanie i throttling albo usługi w tle. Sprawdzimy temperatury pod obciążeniem — to często daje więcej niż wszystko inne.' },
+        { label: 'Chcę żeby działało płynnie z minimalnym obciążeniem CPU', value: 'fps_cpu',
+          answer: 'Obciążenie procesora zjada klatki w grach typu CS2 czy Euro Truck. Ograniczymy liczbę usług i procesów w tle, ale mądrze — nie wyłączając aktualizacji i antywirusa.' }
       ]
     },
     ping: {
@@ -71,7 +75,37 @@
         { label: 'Niski, ale gra się zacina', value: 'ping_lag',
           answer: 'Niski ping z lagami to zazwyczaj coś lokalnego: sprzęt, kolejka pakietów albo obciążony dysk. Damy znać, co dokładnie.' },
         { label: 'Tylko w jednej grze', value: 'ping_game',
-          answer: 'Skoro tylko w jednej grze, problem leży w jej trasie lub w regułach firewalla — obie rzeczy ogarniamy w pakiecie sieciowym.' }
+          answer: 'Skoro tylko w jednej grze, problem leży w jej trasie lub w regułach firewalla — obie rzeczy ogarniamy w pakiecie sieciowym.' },
+        { label: 'Szkodzi bardziej wieczorami', value: 'ping_evening',
+          answer: 'Gorzej wieczorami to klasyka — kumulacja ruchu u operatora. Sprawdzimy to w kilku porach dnia, żeby oddzielić Twój sprzęt od cudzego.' },
+        { label: 'Mieszkam w bloku / na wifi od sąsiada', value: 'ping_wifi',
+          answer: 'Przy Wi-Fi w bloku dochodzą zakłócenia od sąsiadów. Zaczniemy od ustawień karty i pasma, ale uczciwie powiem, kiedy bez kabla nie da się już nic więcej zrobić.' }
+      ]
+    },
+    crash: {
+      q: 'Jak to się objawia?',
+      options: [
+        { label: 'Gra wywala się w losowych momentach', value: 'crash_random',
+          answer: 'Losowe crashy to zwykle niestabilne ustawienia albo przegrzewanie. Robimy backup, sprawdzamy temperatury i testujemy stabilność krok po kroku.' },
+        { label: 'Czarny ekran al BSOD', value: 'crash_bsod',
+          answer: 'BSOD to sygnał, że coś jest na poziomie sprzętu albo sterownika. Zacznniemy od tego, co da się sprawdzić bez rozbierania obudowy, i powiem, czy warto iść dalej.' },
+        { label: 'Komputer sam się restartuje', value: 'crash_reboot',
+          answer: 'Nagłe restarty najczęściej to zasilanie albo temperatura procesora. Oba sprawdzamy w trakcie sesji — i to jest dobry moment, żeby dorzucić undervolting.' },
+        { label: 'Wszystko działa, ale strasznie wolno', value: 'crash_slow',
+          answer: 'Wolno, ale stabilnie — to nie crash, to obciążenie. Usługi w tle, autostart i dysk potrafią zjeść połowę wydajności. To jest nasza najczęstsza robota.' }
+      ]
+    },
+    temp: {
+      q: 'Gdzie jest gorąco?',
+      options: [
+        { label: 'Wentylator na maksa', value: 'temp_fan',
+          answer: 'Wentylator na maksa przy lekkim obciążeniu oznacza, że coś grzeje bez powodu. Undervolting i porządek w tle zwykle wystarczają, żeby ściszyć maszynę o połowę.' },
+        { label: 'Obudowa jest bardzo ciepła', value: 'temp_case',
+          answer: 'Ciepła obudowa to często kurz w filtrach albo złe prowadzenie kabli. Zaczynamy od tego, bo nic nie kosztuje i często wystarcza.' },
+        { label: 'Laptop pod biurkiem', value: 'temp_laptop',
+          answer: 'Laptopy grzeją się, bo mają wąskie kanały chłodzenia. Zrobimy z tego co da się — podkręcenie procesora jest często niemożliwe, ale undervolting robi ogromną różnicę.' },
+        { label: 'Gra się zacina po 20 minutach', value: 'temp_throttle',
+          answer: 'To klasyczny throttling: pierwsze minuty śmigają, potem procesor zwalnia, bo się przegrzewa. Zmierzymy temperatury pod obciążeniem i dobierzemy bezpieczny profil.' }
       ]
     },
     both: {
@@ -89,10 +123,12 @@
 
   // rekomendacja: (pierwsza odpowiedz, druga odpowiedz) -> klucz pakietu
   function recommend(first, second) {
-    if (first === 'fps')  return 'fps';
-    if (first === 'ping') return 'ping';
-    if (first === 'both') return 'combo';
-    if (first === 'free') return 'starter';
+    if (first === 'fps')   return 'fps';
+    if (first === 'ping')  return 'ping';
+    if (first === 'both')  return 'combo';
+    if (first === 'free')  return 'starter';
+    if (first === 'crash') return second === 'crash_slow' ? 'fps' : 'combo';
+    if (first === 'temp')  return second === 'temp_laptop' ? 'fps' : 'combo';
     if (first === 'unknown') return second === 'age_new' ? 'fps' : 'combo';
     return 'combo';
   }
@@ -103,6 +139,8 @@
       { label: 'Klatki / FPS',       value: 'fps' },
       { label: 'Ping i lagi',        value: 'ping' },
       { label: 'Jedno i drugie',     value: 'both' },
+      { label: 'Zawiesza się / crashuje', value: 'crash' },
+      { label: 'Za gorąco i głośno', value: 'temp' },
       { label: 'Nie wiem',           value: 'unknown' },
       { label: 'Chcę tylko plan za darmo', value: 'free' }
     ]
