@@ -246,14 +246,68 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 .list--good li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:700}
 .list--good b{color:var(--text);font-weight:600}
 
-.feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.anchor{padding:28px 24px}
+.anchor__row{grid-template-columns:1fr;gap:7px}
+.anchor__row .anchor__price{font-size:.95rem}
+.anchor__row--us{order:-1}
 .feat{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:24px 21px;transition:border-color .25s,transform .25s,background .25s}
 .feat:hover{border-color:rgba(139,92,246,.45);transform:translateY(-4px);background:var(--surface-2)}
 .feat__ico{display:inline-grid;place-items:center;width:42px;height:42px;border-radius:11px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.28);font-size:1.2rem;margin-bottom:15px}
 .feat h4{font-family:var(--font-d);font-size:1.02rem;font-weight:600;margin-bottom:8px;letter-spacing:-.015em}
 .feat p{font-size:.87rem;color:var(--muted);line-height:1.6}
 
-/* ---------- Pricing ---------- */
+/* ---------- Kotwica cenowa (konkurencja vs Tweakify) ---------- */
+.anchor{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:34px 32px;margin-bottom:24px;
+}
+.anchor__head h3{font-family:var(--font-d);font-size:1.32rem;font-weight:600;letter-spacing:-.02em;margin-bottom:10px}
+.anchor__head p{color:var(--muted);font-size:.94rem;max-width:70ch}
+.anchor__rows{display:grid;gap:14px;margin:28px 0 24px}
+.anchor__row{display:grid;grid-template-columns:minmax(150px,1.3fr) 1fr auto;align-items:center;gap:18px}
+.anchor__name{font-size:.9rem;color:var(--muted)}
+.anchor__row--us .anchor__name{color:var(--text);font-weight:600}
+.anchor__bar{height:12px;border-radius:99px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid var(--line)}
+.anchor__bar i{display:block;height:100%;border-radius:99px}
+.anchor__bar--bad i{background:linear-gradient(90deg,#7f1d1d,#f87171)}
+.anchor__bar--mid i{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
+.anchor__bar--good i{background:linear-gradient(90deg,#00e58f,#6ee7b7);box-shadow:0 0 14px rgba(0,229,143,.55)}
+.anchor__price{font-family:var(--font-d);font-weight:700;font-size:1.05rem;letter-spacing:-.02em;white-space:nowrap}
+.anchor__price--bad{color:var(--red)}
+.anchor__price--good{color:var(--green-2)}
+.anchor__note{font-size:.89rem;color:var(--muted);border-top:1px solid var(--line);padding-top:20px}
+.anchor__note b{color:var(--text)}
+
+/* ---------- Tabela porównawcza pakietów ---------- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);-webkit-overflow-scrolling:touch}
+.cmp{width:100%;min-width:760px;border-collapse:collapse;font-size:.9rem}
+.cmp thead th{
+  position:sticky;top:0;background:var(--surface-2);z-index:2;
+  font-family:var(--font-d);font-weight:600;font-size:.95rem;padding:18px 14px;
+  border-bottom:1px solid var(--line-2);text-align:center;vertical-align:bottom;
+}
+.cmp thead th.cmp__feat{text-align:left;min-width:250px}
+.cmp__sub{display:block;font-family:var(--font-m);font-size:.75rem;font-weight:400;color:var(--dim);margin-top:3px}
+.cmp thead th.cmp__best{background:rgba(139,92,246,.14);color:#dcd0ff}
+.cmp th.cmp__best .cmp__sub{color:var(--violet-2)}
+.cmp tbody th{text-align:left;font-weight:400;color:var(--muted);padding:13px 14px;border-bottom:1px solid rgba(30,36,52,.6)}
+.cmp td{text-align:center;padding:13px 14px;border-bottom:1px solid rgba(30,36,52,.6)}
+.cmp tr:last-child th,.cmp tr:last-child td{border-bottom:0}
+.cmp tbody tr:hover th,.cmp tbody tr:hover td{background:rgba(255,255,255,.02)}
+.cmp .y{color:var(--green);font-weight:700}
+.cmp .n{color:var(--line-2)}
+.cmp .hl{color:var(--green-2);font-size:1.05rem}
+.cmp__group th{
+  text-align:left;font-family:var(--font-m);font-size:.74rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--violet-2)!important;font-weight:500!important;
+  background:rgba(139,92,246,.07);padding:10px 14px!important;
+}
+.table-note{margin-top:22px;text-align:center;color:var(--dim);font-size:.87rem}
+
+/* ---------- Kotwice bez hasza w URL ---------- */
+html.js-scroll-focus{scroll-behavior:smooth}
 .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;align-items:stretch}
 .price{
   position:relative;display:flex;flex-direction:column;
@@ -360,6 +414,7 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
   .console{max-width:560px}
   .price-grid{grid-template-columns:repeat(2,1fr);max-width:840px;margin-inline:auto}
   .feat-grid{grid-template-columns:repeat(2,1fr)}
+  .anchor__row{grid-template-columns:minmax(130px,1.2fr) 1fr auto}
   .steps{grid-template-columns:repeat(2,1fr)}
   .step::after{content:""}
   .footer__in{grid-template-columns:1fr 1fr;gap:34px}
@@ -384,6 +439,7 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
   body{font-size:16px}
   .price-grid{grid-template-columns:1fr;max-width:430px}
   .feat-grid,.steps,.footer__in{grid-template-columns:1fr}
+  .table-wrap{margin-inline:-22px;border-radius:0;border-inline:0}
   .metrics{grid-template-columns:1fr 1fr}
   .hero{padding:52px 0 68px}
   .cta-card{padding:48px 22px}

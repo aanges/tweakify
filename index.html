@@ -73,6 +73,7 @@
     <nav class="menu" id="menu" aria-label="Menu główne">
       <a href="#dlaczego">Dlaczego my</a>
       <a href="#cennik">Cennik</a>
+      <a href="#porownanie">Porównanie</a>
       <a href="#jak-to-dziala">Jak to działa</a>
       <a href="#faq">FAQ</a>
       <a href="https://discord.gg/TWOJ_INVITE" class="btn btn--sm btn--primary" target="_blank" rel="noopener">Zamawiam</a>
@@ -197,41 +198,71 @@
       </p>
     </header>
 
-    <div class="split">
+<div class="split">
       <article class="card card--bad reveal">
         <div class="card__head">
           <span class="card__badge card__badge--bad">✕</span>
-          <h3>Co robi „darmowy booster"</h3>
+          <h3>Gotowe skrypty i configi z YouTube'a</h3>
         </div>
         <ul class="list list--bad">
-          <li>Kręci Ci sprzęt na 100% dla jednej rozgrywki — sprzęt nie ma chwili oddechu.</li>
-          <li>Wciska gotowe configi z YouTube'a, ignorując Twój konkretny procesor i płytę.</li>
-          <li>„Wyciszczenie rejestru" na ślepo, bez kopii zapasowej i bez testu stabilności.</li>
-          <li>Miesza w usługach Windowsa. Po skończeniu masz więcej lagów niż przed sesją.</li>
-          <li>Efekt znika po restarcie — bo zmiany były tymczasowe.</li>
+          <li><b>Skrypt pod jeden sprzęt.</b> Ten sam plik .reg ląduje na Ryzenie, Intelu i na laptopie. Reszta to zgadywanie.</li>
+          <li><b>Efekt do restartu.</b> Config „startowy" działa do momentu ponownego uruchomienia — potem wracasz do punktu zero.</li>
+          <li><b>Bez pomiaru.</b> Nikt nie sprawdza, czy w ogóle pomogło. Płacisz i wierzysz na słowo.</li>
+          <li><b>Ryzyko bez ochrony.</b> Brak kopii rejestru, brak punktu przywracania, brak testu stabilności.</li>
+          <li><b>Cena za „obsługę".</b> 350–500 zł i efekt, który znika po restarcie komputera.</li>
         </ul>
       </article>
 
       <article class="card card--good reveal" style="--d:.08s">
         <div class="card__head">
           <span class="card__badge card__badge--good">✓</span>
-          <h3>Co robi Tweakify</h3>
+          <h3>Ręczna robota pod Twój sprzęt</h3>
         </div>
         <ul class="list list--good">
-          <li><b>Mierzymy bazę.</b> Benchmarki przed i po — masz twarde liczby, nie obietnice.</li>
-          <li><b>Tylko to, co pomoże.</b> Każda zmiana jest odwracalna i udokumentowana.</li>
-          <li><b>Pełna kopia zapasowa</b> rejestru i punktów przywracania przed startem.</li>
-          <li><b>Podmiana planu zasilania</b> z „Zrównoważonego" na „Najwyższą wydajność" — największy darmowy zysk.</li>
-          <li><b>Trwałe ustawienia.</b> Efekt zostaje na stałe, nie do restartu.</li>
+          <li><b>Najpierw diagnoza.</b> Sprawdzamy procesor, płytę, zasilanie, temperatury i to, co faktycznie dusi Twój sprzęt.</li>
+          <li><b>Mierzymy bazę.</b> Benchmarki przed i po — zostają twarde liczby, nie obietnice w stylu „+48%".</li>
+          <li><b>Tylko to, co pomoże.</b> Zero zmian na pokaz. Każda zmiana jest odwracalna i udokumentowana.</li>
+          <li><b>Pełna ochrona.</b> Kopia rejestru i punkt przywracania zanim cokolwiek dotkniemy.</li>
+          <li><b>Trwałe ustawienia.</b> Zostają na stałe — nie do restartu.</li>
         </ul>
       </article>
+    </div>
+
+    <!-- kotwica cenowa: konkurencja vs Tweakify -->
+    <div class="anchor reveal">
+      <div class="anchor__head">
+        <h3>Ile kosztuje to samo gdzie indziej</h3>
+        <p>Realne ceny konkurencyjnych boosterów i zdalnych sesji optymalizacji zaczynają się od 350 zł i sięgają 500 zł. U nas cały pakiet — FPS, sieć, BIOS i podkręcenie — kosztuje mniej niż zestaw obiadowy.</p>
+      </div>
+
+      <div class="anchor__rows">
+        <div class="anchor__row">
+          <span class="anchor__name">Skryptowy booster / konkurencja</span>
+          <span class="anchor__bar anchor__bar--bad"><i style="width:100%"></i></span>
+          <span class="anchor__price anchor__price--bad">350–500 zł</span>
+        </div>
+        <div class="anchor__row">
+          <span class="anchor__name">Tweakify — FPS Boost</span>
+          <span class="anchor__bar anchor__bar--mid"><i style="width:23%"></i></span>
+          <span class="anchor__price">40 zł</span>
+        </div>
+        <div class="anchor__row anchor__row--us">
+          <span class="anchor__name">Tweakify — All-In-One</span>
+          <span class="anchor__bar anchor__bar--good"><i style="width:15%"></i></span>
+          <span class="anchor__price anchor__price--good">75 zł</span>
+        </div>
+      </div>
+
+      <p class="anchor__note"><b>75 zł vs 500 zł.</b> Tyle realnie różni się skryptowy booster działający do restartu od sesji wykonanej pod Twoje konkretne podzespoły — z backupem, testem stabilności i raportem na koniec.</p>
     </div>
 
     <div class="feat-grid">
       <div class="feat reveal"><span class="feat__ico">⚡</span><h4>Plan zasilania</h4><p>Jedna zmiana, która sama daje kilkanaście procent więcej mocy procesora. Najczęściej pomijana.</p></div>
       <div class="feat reveal" style="--d:.05s"><span class="feat__ico">🌡️</span><h4>Undervolting</h4><p>Obniżamy napięcia CPU, by podkręcić takt przy niższej temperaturze. Mniej throttlingu, cichszy wentylator.</p></div>
-      <div class="feat reveal" style="--d:.1s"><span class="feat__ico">🌐</span><h4>Tuning sieci</h4><p>DNS, MTU, jitter buffer, nagrywanie pakietów. Wycinamy jitter, nie tylko średnią.</p></div>
-      <div class="feat reveal" style="--d:.15s"><span class="feat__ico">🔧</span><h4>BIOS &amp; rejestr</h4><p>Memory XMP/EXPO, C-states, Secure Boot, HPET, usługi systemowe, priorytety I/O.</p></div>
+      <div class="feat reveal" style="--d:.1s"><span class="feat__ico">🔥</span><h4>Overclocking</h4><p>Kręcimy procesor i kartę, dobierając krzywą napięcia krok po kroku. Każdy etap przechodzi test stabilności — jeśli system nie utrzymuje taktu, cofamy profil. Wchodzimy tylko w bezpieczne limity sprzętu.</p></div>
+      <div class="feat reveal" style="--d:.15s"><span class="feat__ico">🌐</span><h4>Tuning sieci</h4><p>DNS, MTU, jitter buffer, nagrywanie pakietów. Wycinamy jitter, nie tylko średnią.</p></div>
+      <div class="feat reveal" style="--d:.2s"><span class="feat__ico">🔧</span><h4>BIOS &amp; rejestr</h4><p>Memory XMP/EXPO, C-states, Secure Boot, HPET, usługi systemowe, priorytety I/O.</p></div>
+      <div class="feat reveal" style="--d:.25s"><span class="feat__ico">📊</span><h4>Test stabilności</h4><p>Podkręcone ustawienia bez cykli stabilności to zakład. Robimy je za Ciebie i mówimy wprost, ile wytrzymuje.</p></div>
     </div>
   </div>
 </section>
@@ -332,6 +363,123 @@
     <p class="price-note reveal">
       💳 Płatność BLIK / przelew / PayPal wystawiana po potwierdzeniu na Discordzie. Sesja trwa zwykle 60–90 minut.
     </p>
+  </div>
+</section>
+
+<!-- ══════════ TABELA PORÓWNAWCZA ══════════ -->
+<section class="section" id="porownanie">
+  <div class="wrap">
+    <header class="sec-head">
+      <span class="eyebrow reveal">Porównanie</span>
+      <h2 class="reveal" style="--d:.05s">Co dokładnie <span class="grad-text">dostajesz</span> w każdym pakiecie.</h2>
+      <p class="sec-sub reveal" style="--d:.1s">
+        Bez ukrytych dodatków i dopłat. Zaznaczone są realne elementy wykonywane w trakcie sesji.
+      </p>
+    </header>
+
+    <div class="table-wrap reveal">
+      <table class="cmp">
+        <caption class="sr-only">Porównanie zawartości pakietów Starter, FPS Boost, Ping Killer i All-In-One</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="cmp__feat">Zakres</th>
+            <th scope="col">Starter<span class="cmp__sub">0 zł</span></th>
+            <th scope="col">FPS Boost<span class="cmp__sub">40 zł</span></th>
+            <th scope="col">Ping Killer<span class="cmp__sub">45 zł</span></th>
+            <th scope="col" class="cmp__best">All-In-One<span class="cmp__sub">75 zł</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="cmp__group"><th colspan="5" scope="colgroup">Podstawa</th></tr>
+          <tr>
+            <th scope="row">E-book + checklista 20 punktów</th>
+            <td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Dobór ustawień pod Twój sprzęt</th>
+            <td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Dostęp do kanału #tweaks</th>
+            <td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr class="cmp__group"><th colspan="5" scope="colgroup">Sesja zdalna</th></tr>
+          <tr>
+            <th scope="row">AnyDesk / TeamViewer</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Plan „Najwyższa wydajność"</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Optymalizacja rejestru</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Usługi Windows i autostart</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr class="cmp__group"><th colspan="5" scope="colgroup">Procesor, GPU, BIOS</th></tr>
+          <tr>
+            <th scope="row">Ustawienia GPU / HAGS / V-Sync</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Undervolting CPU</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Overclocking CPU / GPU</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Tuning BIOS (XMP/EXPO, C-states)</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Test stabilności podkręceń</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr class="cmp__group"><th colspan="5" scope="colgroup">Sieć</th></tr>
+          <tr>
+            <th scope="row">Analiza trasy do serwera gry</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Optymalizacja DNS</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Strojenie MTU, NIC i TCP</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Reguły firewalla pod gry</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr class="cmp__group"><th colspan="5" scope="colgroup">Po sesji</th></tr>
+          <tr>
+            <th scope="row">Benchmarki przed / po</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Raport ze zmianami</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Poprawki przez 7 dni</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="y" aria-label="tak">✓</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Dożywotnia opieka serwisowa</th>
+            <td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="n" aria-label="nie">—</span></td><td><span class="hl">♾</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note reveal">Sesja odbywa się zdalnie, przez ekran — zawsze widzisz, co robimy, i możesz ją w każdej chwili przerwać.</p>
   </div>
 </section>
 
@@ -481,6 +629,7 @@
       <h4>Na stronie</h4>
       <a href="#dlaczego">Dlaczego my</a>
       <a href="#cennik">Cennik</a>
+      <a href="#porownanie">Porównanie</a>
       <a href="#jak-to-dziala">Jak to działa</a>
       <a href="#faq">FAQ</a>
     </nav>

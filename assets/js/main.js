@@ -132,4 +132,40 @@
       } catch { /* brak uprawnień do schowka — nic nie robimy */ }
     });
   });
+/* ---------- 7. Kotwice bez hasza w adresie ----------
+     Kliknie w link do sekcji przewija ja, ale nie brudzi adresu
+     o "#dlaczego". Link nadal dziala bez JS (zwykle przekierowanie). */
+  const NAV_OFFSET = 78; // wysokosc sticky nav + pasek
+
+  $$('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#' || hash.length < 2) return;
+
+      const target = document.querySelector(hash);
+      if (!target) return; // cel nie istnieje -> niech przegladarka obsluzy normalnie
+
+      e.preventDefault();
+
+      const top = target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET;
+      const jump = () => window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
+
+      if ('scrollBehavior' in document.documentElement.style) {
+        jump();
+      } else {
+        window.scrollTo(0, top); // stary browser bez smooth
+      }
+
+      // wyczysc hash z adresu (z fallbackiem dla file://)
+      try {
+        history.replaceState(null, '', location.pathname + location.search);
+      } catch {
+        /* tryb file:// blokuje replaceState - nieszkodliwe */
+      }
+
+      // przenies fokus na sekcje dla czytnikow ekranowych
+      target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    });
+  });
 })();
