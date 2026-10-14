@@ -19,7 +19,7 @@
 
   if (!fab || !panel || !log || !chips) return; // brak widgetu -> wyjscie po cichu
 
-  const DISCORD = 'https://discord.gg/TWOJ_INVITE';
+  const DISCORD = 'https://discord.gg/axtRMB4VCB';
 
   /* ---------- Scenariusze ---------- */
 

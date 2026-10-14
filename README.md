@@ -31,7 +31,7 @@ assets/favicon.svg      # ikona
 
 ## Co MUSISZ zmienić przed publikacją
 
-1. **Link do Discorda** — zamień `https://discord.gg/TWOJ_INVITE` na prawdziwy invite.
+1. ~~Link do Discorda~~ — **ustawiony** na `https://discord.gg/axtRMB4VCB`.
    Występuje w pliku `index.html` 4 razy (nav/hero/CTA/stopka). Najszybciej:
    *Podmień → Zamień w pliku*.
 2. **Adres e-mail** — `kontakt@tweakify.pl` → 2 razy (`mailto:` w CTA i w stopce).
