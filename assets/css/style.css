@@ -514,6 +514,40 @@ html.js-scroll-focus{scroll-behavior:smooth}
 }
 .pay__list li:hover{border-color:rgba(139,92,246,.6);background:rgba(139,92,246,.1);transform:translateY(-1px)}
 .pay__note{margin-top:18px;font-size:.82rem;color:var(--dim);line-height:1.55}
+
+/* ---------- Realny pomiar (pojedynczy, zweryfikowany przypadek) ---------- */
+.proof{
+  margin-top:18px;padding:28px 26px;
+  background:linear-gradient(170deg,rgba(0,229,143,.07),var(--surface) 60%);
+  border:1px solid rgba(0,229,143,.28);border-radius:var(--radius);
+}
+.proof__head{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:22px}
+.proof__tag{
+  font-family:var(--font-m);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--green-2);background:rgba(0,229,143,.13);
+  border:1px solid rgba(0,229,143,.35);border-radius:99px;padding:5px 13px;
+}
+.proof__head h3{font-family:var(--font-d);font-size:1.16rem;font-weight:600;letter-spacing:-.02em}
+.proof__nums{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.proof__num{display:flex;flex-direction:column;gap:2px;min-width:96px}
+.proof__num span{font-family:var(--font-m);font-size:.72rem;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.proof__num b{font-family:var(--font-d);font-size:2.6rem;font-weight:700;letter-spacing:-.04em;line-height:1.1;color:var(--dim)}
+.proof__num b small{font-size:.9rem;font-weight:500;color:var(--dim);margin-left:2px}
+.proof__num--after b{color:var(--green-2)}
+.proof__num--after b small{color:var(--green-2);opacity:.75}
+.proof__arrow{font-size:1.5rem;color:var(--line-2);line-height:1}
+.proof__delta{display:flex;flex-direction:column;gap:2px;padding-left:26px;border-left:1px solid var(--line)}
+.proof__delta b{font-family:var(--font-d);font-size:1.3rem;font-weight:700;color:var(--green-2);letter-spacing:-.02em}
+.proof__delta span{font-size:.8rem;color:var(--muted)}
+.proof__note{margin-top:22px;padding-top:18px;border-top:1px solid var(--line);font-size:.8rem;color:var(--dim);line-height:1.6}
+@media (max-width:620px){
+  .proof{padding:22px 18px}
+  .proof__nums{gap:16px}
+  .proof__num{min-width:72px}
+  .proof__num b{font-size:2.1rem}
+  .proof__delta{padding-left:16px}
+  .proof__arrow{font-size:1.1rem}
+}
 @media (max-width:620px){
   .pay{padding:20px 18px}
   .pay__lead{font-size:.9rem}
