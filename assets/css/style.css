@@ -177,7 +177,15 @@ h1{font-family:var(--font-d);font-weight:700;font-size:clamp(2.3rem,5.1vw,4rem);
 
 .hero__stats{display:grid;grid-template-columns:repeat(4,auto);gap:34px;margin-top:48px;padding-top:32px;border-top:1px solid var(--line);justify-content:start}
 .hero__stats li b{display:block;font-family:var(--font-d);font-size:1.95rem;font-weight:700;letter-spacing:-.03em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.15}
+/* symbol bez liczby - animacja licznika go nie obejmuje */
+.hero__stats li b.hero__sym{font-size:2.2rem;line-height:1;padding-top:4px}
 .hero__stats li span{font-size:.79rem;color:var(--dim);letter-spacing:.02em}
+
+/* podpis pod panelem wyniku - jawnie mowi, ze to przyklad */
+.console__note{
+  margin-top:12px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:.72rem;line-height:1.5;color:var(--dim);font-family:var(--font-m);
+}
 
 /* ---------- Console (hero visual) ---------- */
 .console{
