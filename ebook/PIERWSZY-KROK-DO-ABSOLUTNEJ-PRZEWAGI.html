@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIERWSZY KROK DO ABSOLUTNEJ PRZEWAGI — E-book optymalizacyjny TWEAKIFY — wersja skrócona</title>
+<meta name="description" content="Kompletny e-book optymalizacyjny TWEAKIFY. Zero Lag. Maximum FPS. Anatomia opoznien, mity, warsztat krok po kroku.">
+<meta name="author" content="TWEAKIFY">
+<meta name="theme-color" content="#5b3df5">
+<style>
+/* ══════════════════════════════════════════════════════════════
+   TWEAQIFY  ·  ciemny motyw  ·  A4 / PDF
+   Wzorzec: "PIERWSZY KROK PRZEWAGI" (FPS MAXXING)
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  /* Czerń jest wymagana na całej karcie — także w marginesach. */
+  --bg:#000000;
+  --bg-2:#000000;
+
+  /* Poświat w rogach — podpis wzorca */
+  --glow-1:rgba(255,46,138,.16);
+  --glow-2:rgba(145,40,255,.14);
+  --glow-3:rgba(255,46,138,.09);
+
+  --surface:#17101c;
+  --surface-2:#221830;
+  --line:#3a2745;
+  --line-soft:#2a1c33;
+
+  --ink:#f3eefa;
+  --ink-soft:#c2aecd;
+  --ink-faint:#8b7a97;
+
+  /* Akcenty marki: hot pink -> magenta -> fiolet */
+  --pink:#ff2e8a;
+  --magenta:#d926c9;
+  --violet:#8b5cf6;
+  --accent:var(--pink);
+  --accent-2:var(--magenta);
+  --accent-3:var(--violet);
+  --accent-grad:linear-gradient(96deg,#ff2e8a 0%,#ff2e8a 30%,#d926c9 72%,#8b5cf6 100%);
+  --accent-dim:rgba(255,46,138,.14);
+
+  --code-bg:#0d0812;
+  --code-ink:#d9cbe4;
+  --code-key:#ff6bb0;
+}
+
+*{ box-sizing:border-box; }
+html{ background:#000; -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:#000; color:var(--ink);
+  font-family:"Inter","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  font-size:10.5pt; line-height:1.47;
+  text-align:justify; hyphens:auto; -webkit-hyphens:auto;
+  -webkit-font-smoothing:antialiased;
+}
+/* Poświat w rogach — jak w wzorcu */
+body::before,
+body::after{
+  content:""; position:fixed; z-index:0; pointer-events:none;
+  width:150mm; height:150mm; border-radius:50%;
+  filter:blur(28px);
+}
+body::before{
+  top:-60mm; right:-50mm;
+  background:radial-gradient(circle, var(--glow-1) 0%, transparent 70%);
+}
+body::after{
+  bottom:-70mm; left:-55mm;
+  background:radial-gradient(circle, var(--glow-2) 0%, transparent 70%);
+}
+
+/* ── Okładka ───────────────────────────────────────────────── */
+.titlepage{
+  position:relative; z-index:1;
+  page-break-after:always; break-after:page;
+  padding:26mm 0 0; text-align:center;
+}
+.titlepage::before{
+  content:""; display:block; width:44%; height:2.2mm;
+  margin:0 auto 18mm;
+  background:var(--accent-grad); border-radius:2mm;
+}
+.titlepage h1{
+  border:0; padding:0 0 4mm; margin:0 0 4mm;
+  font-size:38pt; line-height:1.02; font-weight:900;
+  letter-spacing:-1.2px; text-transform:uppercase;
+  /* UWAGA: celowo BEZ background-clip:text — Chrome przestaje wtedy
+     malowac tlo strony i marginesy wychodza biale. Dwu-kolor tytulu
+     robimy spanem, a gradient wkladamy w pasek pod tytulem. */
+  color:#ffffff;
+}
+.titlepage h1 .g-pink{ color:var(--pink); }
+.titlepage h1::after{
+  content:""; display:block; width:62%; height:2.4mm;
+  margin:5mm auto 0; border-radius:2mm;
+  background:var(--accent-grad);
+}
+.titlepage h3{
+  border:0; padding:0; margin:0 0 4mm;
+  font-size:10.5pt; font-weight:700;
+  letter-spacing:4.5px; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.titlepage p{ text-align:center; margin:2.4mm 0; color:var(--ink-soft); }
+.titlepage p strong{ color:var(--pink); }
+.titlepage hr{
+  width:16%; margin:11mm auto; border:0;
+  border-top:.8pt solid var(--line);
+}
+.titlepage em{
+  display:block; margin-top:2.5mm;
+  color:var(--magenta); font-style:normal;
+  font-size:11pt; font-weight:600; letter-spacing:2.6px; text-transform:uppercase;
+}
+
+/* ── Ochrona treści / antypiract na okładce ──────────────── */
+.cover-anti{
+  margin:6mm 6mm 0;
+  padding:3.4mm 5mm;
+  background:rgba(255,46,138,.07);
+  border:.5pt solid rgba(255,46,138,.28);
+  border-radius:1.6mm;
+  font-size:7.2pt; line-height:1.45;
+  color:var(--ink-soft);
+  text-align:center; letter-spacing:.1px;
+  hyphens:auto;
+}
+.cover-anti strong{ color:var(--pink); font-weight:700; }
+.cover-anti a{ color:var(--pink); font-weight:700; border-bottom:0; }
+.cover-anti p{ margin:0; text-align:center; }
+
+/* ── Zastrzeżenie prawne na okładce ─────────────────────── */
+.cover-legal{
+  margin:16mm 6mm 0;
+  padding:3.4mm 5mm 0;
+  border-top:.5pt solid var(--line);
+  font-size:7.2pt; line-height:1.45;
+  color:var(--ink-faint);
+  text-align:center; letter-spacing:.1px;
+  hyphens:auto;
+}
+.cover-legal strong{ color:var(--pink); font-weight:700; }
+.cover-legal p{ margin:0; text-align:center; }
+
+/* ── Nagłówki ─────────────────────────────────────────────── */
+h1,h2,h3,h4,h5,h6{
+  text-align:left; font-weight:700; color:var(--ink);
+  hyphens:none; -webkit-hyphens:none;
+}
+
+h1{
+  position:relative; overflow:hidden;
+  margin:0 0 5.5mm; padding:0 0 3mm;
+  font-size:21pt; line-height:1.1; font-weight:900;
+  letter-spacing:-.4px; text-transform:uppercase;
+  color:#fff;
+}
+h1::after{
+  content:""; display:block; position:absolute;
+  left:0; right:0; bottom:0; height:1.6mm;
+  background:var(--accent-grad);
+}
+.chapter--part{ page-break-before:always; break-before:page; margin-top:0; padding-top:2mm; }
+/* Wprowadzenie zaczyna sie od swojej strony — bez tego plyne
+   zaraz za spisem tresci, na tej samej karcie. */
+.chapter--front{ page-break-before:always; break-before:page; margin-top:0; padding-top:2mm; }
+
+h2{
+  margin:6mm 0 2.2mm; padding:1.8mm 0 1.8mm 3.4mm;
+  font-size:13pt; line-height:1.22; font-weight:800;
+  color:#fff;
+  border-left:1.8mm solid var(--pink);
+  background:linear-gradient(90deg, rgba(255,46,138,.15), rgba(217,38,201,.07) 55%, transparent);
+  border-radius:0 1.2mm 1.2mm 0;
+}
+h3{
+  margin:4.6mm 0 1.6mm; padding-bottom:1.2mm;
+  font-size:11.2pt; line-height:1.26; font-weight:700;
+  color:var(--magenta);
+  border-bottom:.6pt solid var(--line);
+  letter-spacing:.2px;
+}
+h4{
+  margin:4mm 0 1.2mm; font-size:9.2pt;
+  color:var(--ink-faint); text-transform:uppercase;
+  letter-spacing:1.8px; font-weight:700;
+}
+h5{ margin:3.4mm 0 1mm; font-size:10.2pt; color:var(--ink-soft); }
+h6{ margin:3mm 0 .9mm; font-size:9.7pt; color:var(--ink-faint); }
+
+.chapter--appendix{ color:var(--magenta); }
+
+/* ── Akapity ──────────────────────────────────────────────── */
+p{ margin:0 0 2.3mm; }
+strong{ font-weight:700; color:#fff; }
+em{ font-style:italic; color:var(--ink); }
+a{ color:var(--pink); text-decoration:none; border-bottom:.6pt solid rgba(255,46,138,.45); }
+
+/* ── Listy ────────────────────────────────────────────────── */
+ul,ol{ margin:0 0 2.6mm; padding-left:5.2mm; }
+li{ margin:0 0 .9mm; }
+li > ul, li > ol{ margin:.9mm 0 .9mm; }
+ul > li{ list-style:none; position:relative; }
+ul > li::before{
+  content:""; position:absolute; left:-2.6mm; top:1.7mm;
+  width:1.2mm; height:1.2mm; border-radius:50%;
+  background:var(--pink);
+}
+ol{ counter-reset:oln; }
+ol > li{ list-style:none; counter-increment:oln; position:relative; }
+ol > li::before{
+  content:counter(oln);
+  position:absolute; left:-5mm; top:.1mm;
+  width:3.6mm; height:3.6mm; border-radius:1mm;
+  background:rgba(255,46,138,.16); color:var(--pink);
+  font-size:7.4pt; font-weight:800; line-height:3.6mm; text-align:center;
+}
+li > p{ margin-bottom:.9mm; }
+
+/* ── Kod ──────────────────────────────────────────────────── */
+code{
+  font-family:"JetBrains Mono","Cascadia Mono",Consolas,"SF Mono",ui-monospace,monospace;
+  font-size:.84em; background:var(--surface); color:var(--pink);
+  padding:.3mm 1.1mm; border-radius:.9mm;
+  border:.5pt solid var(--line);
+  white-space:normal; overflow-wrap:anywhere;
+}
+pre{
+  position:relative;
+  background:var(--code-bg); color:var(--code-ink);
+  border:.6pt solid var(--line); border-left:1.4mm solid var(--magenta);
+  border-radius:0 1.4mm 1.4mm 0;
+  padding:4.4mm 3mm 2.8mm;
+  margin:0 0 2.8mm;
+  font-size:7.9pt; line-height:1.44;
+  page-break-inside:auto; break-inside:auto;
+  text-align:left; hyphens:none; overflow:hidden;
+}
+pre::before{
+  content:attr(data-lang);
+  position:absolute; top:1.3mm; left:3mm;
+  font-size:6.2pt; letter-spacing:1.8px; text-transform:uppercase;
+  color:var(--ink-faint); font-family:"Inter",system-ui,sans-serif;
+}
+pre code{
+  background:none; border:0; padding:0; color:var(--code-key);
+  font-size:inherit; white-space:pre-wrap; word-break:break-word;
+}
+
+/* ── Tabele ───────────────────────────────────────────────── */
+.table-wrap{ margin:0 0 3mm; page-break-inside:auto; break-inside:auto; overflow:hidden; }
+tr{ page-break-inside:avoid; break-inside:avoid; }
+table{
+  width:100%; border-collapse:collapse;
+  font-size:8.3pt; line-height:1.34; text-align:left;
+  hyphens:none; -webkit-hyphens:none;
+}
+th{
+  background:var(--surface-2); color:var(--pink);
+  font-weight:700; text-align:left;
+  padding:1.3mm 1.6mm; border:none;
+  border-bottom:1pt solid var(--pink);
+  font-size:7.4pt; letter-spacing:1px; text-transform:uppercase;
+}
+td{ padding:1.15mm 1.6mm; border:none; border-bottom:.5pt solid var(--line-soft); vertical-align:top; }
+tbody tr:last-child td{ border-bottom:1pt solid var(--line); }
+tbody tr:nth-child(even) td{ background:rgba(255,46,138,.028); }
+
+/* ── Cytaty / callouty ────────────────────────────────────── */
+blockquote{
+  margin:0 0 3mm; padding:2.8mm 3.4mm;
+  background:linear-gradient(100deg, rgba(255,46,138,.13), rgba(139,92,246,.08) 62%, transparent);
+  border-left:1.4mm solid var(--pink);
+  border-radius:0 1.4mm 1.4mm 0;
+  font-style:normal; color:var(--ink);
+  font-size:9.8pt; line-height:1.44;
+  page-break-inside:avoid; break-inside:avoid;
+}
+blockquote p:last-child{ margin-bottom:0; }
+blockquote strong{ color:var(--pink); }
+
+hr{ border:0; height:.8pt; background:var(--line); margin:4.5mm 0; }
+
+/* ── Spis treści ───────────────────────────────────────────── */
+.chapter--toc{ page-break-before:always; break-before:page; }
+.toc__list{ list-style:none; padding-left:0; margin:0; }
+.toc__list li{ margin:0; }
+.toc__l1{
+  font-weight:800; margin:2.6mm 0 .8mm; font-size:10pt;
+  text-transform:uppercase; letter-spacing:.4px;
+  color:#fff; padding-left:3.2mm;
+  border-left:1.2mm solid var(--pink);
+}
+.toc__l2{ margin:0 0 .5mm; padding-left:8.4mm; font-size:8.8pt; color:var(--ink-faint); }
+.toc__list a{ border-bottom:0; color:inherit; }
+
+/* ── Checkboxy ────────────────────────────────────────────── */
+.cb{
+  display:inline-block; width:2.9mm; height:2.9mm;
+  border:.9pt solid var(--ink-faint); border-radius:.7mm;
+  vertical-align:-.2mm; margin-right:1.3mm;
+}
+.cb--on{ background:var(--pink); border-color:var(--pink); }
+
+/* ── Układ ────────────────────────────────────────────────── */
+.sheet{
+  overflow-wrap:anywhere;
+  position:relative; z-index:1;
+  max-width:210mm; margin:0 auto;
+  padding:15mm 14mm 13mm;
+  background:transparent;
+  border-left:.5pt solid rgba(255,255,255,.05);
+  border-right:.5pt solid rgba(255,255,255,.05);
+}
+
+@media screen{
+  body{ padding:10mm 0; }
+  h1,h2,h3{ scroll-margin-top:10mm; }
+}
+
+/* ── Druk / PDF ───────────────────────────────────────────────
+   @page margin MUSI byc 0 — Chrome przycina tlo do pola tresci,
+   wiec przy marginesach w @page czarne tlo konczylo sie na
+   krawedzi kolumny, a marginesy wychodzily biale.
+   Marginesy przeniesione na padding .sheet. */
+@page{ size:A4 portrait; margin:0; }
+@media print{
+  html{ background:#000 !important; }
+  body{ background:#000 !important; }
+  body::before, body::after{ display:none; }
+  /* Pelna plansza pod spodem. Nie polegamy na propagacji tla html/body
+     do canvasu — na stronie 1 Chrome nie malowal go w ogole, przez co
+     marginesy wychodzily biale. position:fixed + inset:0 w trybie
+     druku obejmuje cala strone. */
+  html::before{
+    content:""; position:fixed; inset:0;
+    background:#000; z-index:-1; pointer-events:none;
+  }
+  .sheet{
+    max-width:none; margin:0; padding:15mm 14mm 13mm;
+    background:transparent; border:none; box-shadow:none;
+    overflow-wrap:anywhere;
+  }
+  h1,h2,h3,h4{ break-after:avoid-page; page-break-after:avoid; }
+  ul,ol{ break-inside:auto; }
+  html,body,.sheet,.sheet *{
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<article class="sheet">
+<div class="titlepage">
+<h1 id="pierwszy-krok-br-span-class-g-pink-do-absolutnej-przewagi-span" class="chapter">PIERWSZY KROK<br><span class="g-pink">DO ABSOLUTNEJ PRZEWAGI</span></h1>
+  <h3 id="e-book-optymalizacyjny-marki-tweakify">E-book optymalizacyjny marki <strong>TWEAKIFY</strong></h3>
+  <p><strong>Zero Lag. Maximum FPS.</strong></p>
+  <hr>
+  <p><strong>Twój sprzęt nie jest słaby. Jest źle skonfigurowany.</strong></p>
+  <div class="cover-legal">
+  <p><strong>Materiał wyłącznie edukacyjny.</strong> Tweakify nie ponosi odpowiedzialności za skutki samodzielnego wprowadzania zmian w systemie, rejestrze, BIOS-ie lub sprzęcie — w szczególności za konfigurację wykonaną samodzielnie i nieprawidłowo. Przed każdą zmianą zrób punkt przywracania i kopię rejestru.</p>
+    <div class="cover-anti">
+    <p><strong>Ten e-book jest bezpłatny.</strong> Jeśli ktoś próbował go Ci sprzedać — zgłoś sprzedawcę odpowiednim służbom i napisz do nas na <a href="https://discord.gg/axtRMB4VCB">Discordzie</a>. Pomożemy zgłosić naruszenie, wyciągnąć konsekwencje i oddać Ci bezpłatnie to, co Ci przepadło.</p>
+    </div>
+  </div>
+</div>
+<h1 id="spis-tresci" class="chapter chapter--toc">SPIS TREŚCI</h1>
+<ul class="toc__list">
+<li class="toc__l1"><a href="#wprowadzenie-manifest-tweakify">WPROWADZENIE — MANIFEST TWEAKIFY</a></li>
+<li class="toc__l1"><a href="#rozdzial-1-anatomia-opoznienia-i-spadkow-fps">ROZDZIAŁ 1 — ANATOMIA OPÓŹNIENIA I SPADKÓW FPS</a></li>
+<li class="toc__l2"><a href="#1-1-frame-time-kontra-fps-matematyka-ktora-zmienia-wszystko">1.1 Frame time kontra FPS — matematyka, która zmienia wszystko</a></li>
+<li class="toc__l2"><a href="#1-2-percentyle-1-low-jest-jedyna-uczciwa-miara">1.2 Percentyle: 1% Low jest jedyną uczciwą miarą</a></li>
+<li class="toc__l2"><a href="#1-3-droga-sygnalu-16-etapow-od-klikniecia-do-piksela">1.3 Droga sygnału: 16 etapów od kliknięcia do piksela</a></li>
+<li class="toc__l2"><a href="#1-4-praca-procesora-watek-gry-render-i-cache">1.4 Praca procesora: wątek gry, render i cache</a></li>
+<li class="toc__l2"><a href="#1-5-buforowanie-wyswietlania-dwm-flip-i-frame-pacing">1.5 Buforowanie wyświetlania: DWM, flip i frame pacing</a></li>
+<li class="toc__l2"><a href="#1-6-realna-latencja-monitora">1.6 Realna latencja monitora</a></li>
+<li class="toc__l2"><a href="#1-7-mitologia-czyszczenia-kontra-inzynieria-systemowa">1.7 Mitologia czyszczenia kontra inżynieria systemowa</a></li>
+<li class="toc__l2"><a href="#1-8-fabryczny-windows-11-i-jego-sabotaz">1.8 Fabryczny Windows 11 i jego sabotaż</a></li>
+<li class="toc__l2"><a href="#1-9-podsumowanie-trzy-typy-przegrzania">1.9 Podsumowanie — trzy typy przegrzania</a></li>
+<li class="toc__l1"><a href="#rozdzial-2-samemu-kontra-pro">ROZDZIAŁ 2 — SAMEMU KONTRA PRO</a></li>
+<li class="toc__l2"><a href="#2-1-anatomia-game-boostera">2.1 Anatomia „Game Boostera&quot;</a></li>
+<li class="toc__l2"><a href="#2-2-cyfrowe-placebo">2.2 Cyfrowe placebo</a></li>
+<li class="toc__l2"><a href="#2-3-ukryte-zagrozenia">2.3 Ukryte zagrożenia</a></li>
+<li class="toc__l2"><a href="#2-4-booster-jako-generator-mikrostutteringu">2.4 Booster jako generator mikrostutteringu</a></li>
+<li class="toc__l2"><a href="#2-5-metodologia-tweakify-szesc-faz">2.5 Metodologia Tweakify — sześć faz</a></li>
+<li class="toc__l2"><a href="#2-6-porownanie-metod">2.6 Porównanie metod</a></li>
+<li class="toc__l1"><a href="#rozdzial-3-obalamy-wielkie-mity-gamingu">ROZDZIAŁ 3 — OBALAMY WIELKIE MITY GAMINGU</a></li>
+<li class="toc__l2"><a href="#3-1-mit-1-mam-potezny-sprzet-wiec-optymalizacja-jest-zbedna">3.1 Mit 1: „Mam potężny sprzęt, więc optymalizacja jest zbędna&quot;</a></li>
+<li class="toc__l2"><a href="#3-2-mit-2-wiecej-ram-u-i-drozsze-podzespoly-zalatwia-problem">3.2 Mit 2: „Więcej RAM-u i droższe podzespoły załatwią problem&quot;</a></li>
+<li class="toc__l2"><a href="#3-3-mit-3-slaby-komputer-jest-stracony">3.3 Mit 3: „Słaby komputer jest stracony&quot;</a></li>
+<li class="toc__l2"><a href="#3-4-dwa-mity-bonusowe">3.4 Dwa mity bonusowe</a></li>
+<li class="toc__l1"><a href="#rozdzial-4-praktyczny-warsztat-tweakify">ROZDZIAŁ 4 — PRAKTYCZNY WARSZTAT TWEAKIFY</a></li>
+<li class="toc__l2"><a href="#4-0-zanim-cokolwiek-zmienisz-protokol-bezpieczenstwa">4.0 Zanim cokolwiek zmienisz: protokół bezpieczeństwa</a></li>
+<li class="toc__l2"><a href="#4-1-pamiec-masowa-pliki-tymczasowe-i-cache-shaderow">4.1 Pamięć masowa, pliki tymczasowe i cache shaderów</a></li>
+<li class="toc__l2"><a href="#4-2-inzynieria-okien-systemu-dwm-i-swapeffect">4.2 Inżynieria okien systemu: DWM i SwapEffect</a></li>
+<li class="toc__l2"><a href="#4-3-walka-z-input-lagiem-peryferiow">4.3 Walka z input lagiem peryferiów</a></li>
+<li class="toc__l2"><a href="#4-4-plan-zasilania-najczesciej-pomijany-i-najwyzej-oplacalny-element">4.4 Plan zasilania — najczęściej pomijany i najwyżej opłacalny element</a></li>
+<li class="toc__l2"><a href="#4-5-tryb-gry-hags-i-nadzor">4.5 Tryb gry, HAGS i nadzór</a></li>
+<li class="toc__l2"><a href="#4-6-bios-pamiec-hpet-smt-i-undervolting">4.6 BIOS: pamięć, HPET, SMT i undervolting</a></li>
+<li class="toc__l2"><a href="#4-7-siec-dns-mtu-nagle-i-firewalle">4.7 Sieć: DNS, MTU, Nagle i firewalle</a></li>
+<li class="toc__l2"><a href="#4-8-checklista-20-punktow-tweakify">4.8 Checklista 20 punktów TWEAKIFY</a></li>
+<li class="toc__l1"><a href="#rozdzial-5-filozofia-i-przyszlosc-tweakify">ROZDZIAŁ 5 — FILOZOFIA I PRZYSZŁOŚĆ TWEAKIFY</a></li>
+<li class="toc__l2"><a href="#5-1-dla-graczy-od-graczy">5.1 Dla graczy. Od graczy.</a></li>
+<li class="toc__l2"><a href="#5-2-dozywotnia-opieka-serwisowa">5.2 Dożywotnia opieka serwisowa</a></li>
+<li class="toc__l2"><a href="#5-3-twoj-nastepny-krok-ticket-na-discordzie">5.3 Twój następny krok: ticket na Discordzie</a></li>
+<li class="toc__l2"><a href="#5-4-zamkniecie">5.4 Zamknięcie</a></li>
+<li class="toc__l1"><a href="#aneks-a-sciagawka-komend">ANEKS A — ŚCIĄGAWKA KOMEND</a></li>
+<li class="toc__l1"><a href="#aneks-b-swiadczenie-i-zastrzezenia">ANEKS B — ŚWIADCZENIE I ZASTRZEŻENIA</a></li>
+</ul>
+<h1 id="wprowadzenie-manifest-tweakify" class="chapter chapter--front">WPROWADZENIE — MANIFEST TWEAKIFY</h1>
+<p><strong>„Zero Lag. Maximum FPS&quot;</strong> to nie jest slogan. To jest <strong>kontrakt pomiarowy</strong> — każdy z tych wyrazów ma dokładne znaczenie techniczne, które rozbierzemy w tym e-booku.</p>
+<p><strong>Nie sprzedajemy obietnic. Sprzedajemy pomiary.</strong> Każda liczba w tym dokumencie pochodzi z mechanizmu, który da się opisać na poziomie elektroniki, jądra systemu albo protokołu sprzętowego.</p>
+<p><strong>Bloatware</strong> to oprogramowanie zbędne do pracy systemu, a mimo to instalowane, uruchamiane i aktualizowane — zjadając cykle procesora, przepustowość pamięci i energię. Producenci PC zostawiają go nieprzypadkiem: jest częścią modelu, w którym liczy się gotówka z aplikacji preinstalowanych, nie cena zaślepki procesora. <strong>My przyjmujemy pozycję przeciwną:</strong></p>
+<blockquote><p><strong>Każdy element systemu, który nie służy Twojej grze, jest podejrzany do czasu udowodnienia swojej niewinności.</strong></p></blockquote>
+<p>To nie znaczy „wyłącz wszystko&quot;. Znaczy: <strong>zrozum, zmierz, dopiero potem decyduj</strong>. Automatyczne wyłączanie usług systemowych kończy się awarią aktualizacji; automatyczne pozostawienie ich pozwala na kosmetyzm — system wygląda na zoptymalizowany, a użytkownik traci kilkanaście procent, których nawet nie zauważa.</p>
+<p><strong>Dla graczy. Od graczy.</strong> Optymalizujemy FPS, nie „ogólną wydajność&quot;. Bezpieczeństwo jest ważne, ale nie kosztem rozgrywki — dlatego nigdy nie mówimy „wyłącz antywirusa&quot;, tylko „skonfiguruj go, żeby nie skanował folderu z grą&quot;.</p>
+<p><strong>Zastrzeżenie:</strong> funkcjonowanie Windowsa zmienia się między wersjami. Wynik zależy od sprzętu, BIOS-u, sterownika i operatora sieci. <strong>Nie gwarantujemy konkretnego wzrostu FPS.</strong> Nie ponosimy odpowiedzialności za samodzielne stosowanie opisanych procedur — rób punkt przywracania.</p>
+<hr>
+<h1 id="rozdzial-1-anatomia-opoznienia-i-spadkow-fps" class="chapter chapter--part">ROZDZIAŁ 1 — ANATOMIA OPÓŹNIENIA I SPADKÓW FPS</h1>
+<p><strong>Czym jest optymalizacja od podszewki.</strong> Zbudujmy razem anatomię jednej klatki — od mikrosekundowej rejestracji nacisku klawisza, przez kilkanaście etapów w systemie, aż po zapis ładunku elektrostatycznego do matrycy monitora. Bez tego modelu każda „poprawka&quot; jest zgadywaniem.</p>
+<h2 id="1-1-frame-time-kontra-fps-matematyka-ktora-zmienia-wszystko">1.1 Frame time kontra FPS — matematyka, która zmienia wszystko</h2>
+<p><strong>Klatka</strong> to dla procesora nie obrazek, lecz konkretna liczba w konkretnym miejscu pamięci. W 2560×1440 to <strong>11 059 200 bajtów</strong> surowych danych na klatkę. Ta klatka musi przejść: przestrzeń adresową CPU → VRAM → blok ROP → skalowanie → enkoder wideo → transmiter DisplayPort → kontroler monitora → bufor ramki → tranzystory panelu. I wszystko to musi zmieścić się w <strong>zamrożonym budżecie czasu</strong>:</p>
+<div class="table-wrap"><table><thead><tr><th>Częstotliwość monitora</th><th>Budżet na jedną klatkę</th></tr></thead><tbody><tr><td>60 Hz</td><td>16,67 ms</td></tr><tr><td>144 Hz</td><td>6,94 ms</td></tr><tr><td>240 Hz</td><td>4,17 ms</td></tr><tr><td>360 Hz</td><td>2,78 ms</td></tr></tbody></table></div>
+<p>Przy 360 Hz cały potok musi zamknąć się w niecałych 2,8 ms. <strong>Optymalizacja to nie „sprawienie, żeby było szybciej&quot; — to sprawienie, żeby ten budżet nigdy nie został przekroczony.</strong> Kiedy zostaje przekroczony, nie tracisz trochę wydajności: tracisz <strong>całą klatkę wizualną</strong>.</p>
+<p><strong>Czas klatki</strong> to <code>frame time = 1000 / FPS</code> milisekund:</p>
+<ul>
+<li>200 FPS → 5,00 ms</li>
+<li>210 FPS → 4,76 ms</li>
+<li>90 FPS → 11,11 ms</li>
+<li>100 FPS → 10,00 ms</li>
+</ul>
+<p>Z 200 na 210 FPS skracasz klatkę o <strong>0,24 ms</strong>. Z 90 na 100 FPS — o <strong>1,11 ms</strong>, czyli ponad czterokrotnie bardziej. Wrażenie płynności jest funkcją <strong>czasu klatki</strong>, nie FPS. Dlatego granica 100 FPS jest tak nieproporcjonalnie ważna — to moment, w którym czas klatki przekracza 10 ms i wchodzi w zakres, w którym percepcja zaczyna reagować na opóźnienie zwrotnej.</p>
+<h2 id="1-2-percentyle-1-low-jest-jedyna-uczciwa-miara">1.2 Percentyle: 1% Low jest jedyną uczciwą miarą</h2>
+<p><strong>Średni FPS jest statystycznie bezużyteczny jako miara jakości rozgrywki.</strong></p>
+<p>Weźmy mecz 10-minutowy w CS2 przy 220 FPS: to ~132 000 klatek. Większość trwa 4,5 ms, ale niektóre 40 ms, a przy starciu z shotgunem 120 ms. Średnia powie Ci, że masz świetny sprzęt — bo <strong>średnia nie patrzy na najgorszy moment meczu</strong>, a to właśnie w nim rozgrywa się mecz.</p>
+<p>Dlatego branża używa percentyli:</p>
+<div class="table-wrap"><table><thead><tr><th>Wskaźnik</th><th>Co mówi</th></tr></thead><tbody><tr><td><strong>1% Low</strong></td><td>Najniższy FPS w <strong>najgorszych 1% klatek</strong> sesji</td></tr><tr><td><strong>0,1% Low</strong></td><td>Najgorsze 0,1% meczu</td></tr><tr><td><strong>Frame time 99,9%</strong></td><td>Czas, poniżej którego zmieściło się 99,9% klatek</td></tr></tbody></table></div>
+<p>Przy 132 000 klatek 1% to <strong>1320 klatek</strong>. Jeśli 1% Low = 95 FPS, to w te 1320 klatkach Twój czas klatki wynosił 10,5 ms lub więcej — <strong>ponad dwukrotnie gorzej niż średnia</strong>.</p>
+<p><strong>Różnica między graczem za 3000 zł a graczem za 9000 zł prawie nigdy nie polega na średnim FPS.</strong> Oba komputery dają ~200 FPS. Różnica polega na tym, że droższy nie ma skoków: ma płaską, stabilną krzywą.</p>
+<blockquote><p><strong>Optymalizacja, która podnosi średnią o 10%, ale pogarsza 1% Low o 20%, jest szkodliwa.</strong></p></blockquote>
+<p><strong>Jak mierzyć (2 minuty):</strong> CapFrameX (darmowy, open source) lub PresentMon. Uruchom grę w stałych warunkach, 10 minut, zapis do pliku. <strong>Obejrzyj wykres frametime'ów, nie średnią.</strong> Płaska linia = zdrowo. Igły do 50 ms = mikrostuttering. Bez tego punktu odniesienia każda zmiana jest nieweryfikowalna.</p>
+<h2 id="1-3-droga-sygnalu-16-etapow-od-klikniecia-do-piksela">1.3 Droga sygnału: 16 etapów od kliknięcia do piksela</h2>
+<pre data-lang=""><code> [1] Przełącznik          ~0,1–0,5 ms
+ [2] Obwód elektroniczny  ~0,02 ms
+ [3] Enkoder, delta X/Y   ~0,1 ms
+ [4] Raport HID po USB    zależne od polling rate
+ [5] Hub / kontroler xHCI ~0,05–1 ms
+ [6] Sterownik USB        ~0,1–2 ms
+ [7] Warstwa HID          ~0,05 ms
+ [8] Raw input            ~0,05 ms
+ [9] Filtr sterownika     ~0,1–5 ms   ← częsty problem
+[10] Kolejka / DPC        0–1000+ ms  ← MIKROSTUTTERING
+[11] Wątek wejściowy gry  ~0,05–0,3 ms
+[12] Logika, stany        ~0,5–4 ms
+[13] Render               2–15 ms
+[14] Kolejkowanie / DWM   ~0,1–8 ms
+[15] Transmisja po DP     ~0,1–0,5 ms
+[16] Skanowanie panelu    0,5–20 ms</code></pre>
+<h3 id="polling-rate-i-dlaczego-nie-dziala-liniowo">Polling rate — i dlaczego nie działa liniowo</h3>
+<div class="table-wrap"><table><thead><tr><th>Polling rate</th><th>Odstęp między raportami</th></tr></thead><tbody><tr><td>500 Hz</td><td>2,0 ms</td></tr><tr><td>1000 Hz</td><td>1,0 ms</td></tr><tr><td>4000 Hz</td><td>0,25 ms</td></tr><tr><td>8000 Hz</td><td>0,125 ms</td></tr></tbody></table></div>
+<p>Zwiększenie polling rate <strong>nie skraca opóźnienia proporcjonalnie</strong>, bo sterownik USB pracuje w <strong>cyklu 1-milisekundowym</strong> (USB frame/microframe). Przy 8000 Hz mysz raportuje 8 razy w jednym cyklu systemu, ale system przetwarza to w swoim własnym rytmie. Realna korzyść z 4000 Hz wobec 1000 Hz to około <strong>0,2–0,6 ms</strong>.</p>
+<p><strong>Przejście z 500 Hz na 1000 Hz jest jednym z najbardziej odczuwalnych ulepszeń i jest darmowe</strong> — wystarczy zmienić jedną opcję w oprogramowaniu myszy. <strong>Uwaga na pułapkę:</strong> zmiana DPI często zmienia też polling rate — zawsze sprawdzaj obie wartości.</p>
+<p><strong>Warstwa 4 jest asymptotą e-sportu.</strong> Wyższy polling rate = więcej raportów = większe obciążenie CPU. Dlatego <strong>1000 Hz to rekomendacja dla 90% graczy</strong>: zysk z 4000 Hz jest mierzalny, ale nie wart tego obciążenia, gdy gra jest CPU-bound.</p>
+<h3 id="filtr-sterownika-myszy-najczestsza-i-najbardziej-zaskakujaca-przyczyna-input-lag">Filtr sterownika myszy — najczęstsza i najbardziej zaskakująca przyczyna input lagu</h3>
+<p>Sterownik myszy w Windows potrafi <strong>buforować i wygładzać raporty</strong>, żeby kursor wydawał się płynniejszy. Filtr działa w wątku systemowym i potrafi blokować kolejkę komunikatów, czekając na kolejny raport. W skrajnym przypadku <strong>dodaje kilka milisekund</strong>. Dlatego w scenariuszach e-sportowych rekomenduje się wyłączenie filtra i pracę na „surowym&quot; systemie.</p>
+<h3 id="dpc-miejsce-w-ktorym-rodzi-sie-mikrostuttering">DPC — miejsce, w którym rodzi się mikrostuttering</h3>
+<p><strong>DPC pozwala sterownikowi zaplanować wykonanie funkcji w trybie jądra</strong> z najwyższym priorytetem. Windows gwarantuje, że taki kod nie zostanie przerwany — <strong>i sterownicy często tę gwarancję nadużywają.</strong> Źle napisany DPC trwa od ułamka do <strong>kilkunastu milisekund</strong>.</p>
+<p><strong>Co się dzieje w grze, gdy DPC przejmuje procesor na 3 ms?</strong> Wątek gry nie jest wykonywany przez 3 ms. Przy 144 Hz budżet to 6,94 ms — <strong>zabrakło 43% budżetu</strong>. Klatka zostaje powtórzona (V-Sync) albo pominięta.</p>
+<blockquote><p><strong>To jest mikrostuttering. Nie zbyt wysoki FPS. Nie za słaby procesor. Nieprzewidywalne blokowanie procesora przez sterownik.</strong></p></blockquote>
+<p>Najczęstsze winowajce: sterowniki Realtek'a (dźwiękowe i sieciowe), moduły Realtek Audio Console / Nahimic / DTS, sterowniki Wi-Fi, oprogramowanie peryferiów (G Hub, Synapse, iCUE) i aktywnie skanujące antywirusy.</p>
+<p><strong>Diagnostyka:</strong> LatencyMon (najlepsze narzędzie, daje trwaje DPC per sterownik), WPR (wbudowane w Windows, używane przez support Microsoftu), DPC Latency Checker.</p>
+<h2 id="1-4-praca-procesora-watek-gry-render-i-cache">1.4 Praca procesora: wątek gry, render i cache</h2>
+<p><strong>Grafika nie jest generowana w całości przez kartę graficzną</strong> — to stereotyp z 1997 roku. Silnik dzieli klatkę na sekwencje o określonej liczbie milisekund:</p>
+<ul>
+<li><strong>Game Thread</strong> — wejście, AI, fizyka, animacje, sieć. Krytyczny wątek główny.</li>
+<li><strong>Render Thread</strong> — stany świata → operacje geometryczne → lista rysowania.</li>
+<li><strong>Worker Threads</strong> — dekodowanie tekstur, meshe światła, cienie, fizyka.</li>
+<li><strong>Audio / Network Threads</strong> — bardzo wysokie wymagania determinizmu czasu.</li>
+</ul>
+<p><strong>Konsekwencja praktyczna:</strong> przy gamingu wybieraj procesor o najwyższej częstotliwości <strong>jednordzeniowej</strong> (boost clock), nie o największej liczbie rdzeni. Czterordzeniowy 4,8 GHz bije ośmiordzeniowy 3,6 GHz w większości gier.</p>
+<h3 id="cache-jedna-z-najbardziej-niedocenianych-rzeczy-w-komputerze">Cache — jedna z najbardziej niedocenianych rzeczy w komputerze</h3>
+<div class="table-wrap"><table><thead><tr><th>Poziom</th><th>Czas dostępu</th></tr></thead><tbody><tr><td>L1d (dane)</td><td>~0,3 ns</td></tr><tr><td>L2</td><td>~4–7 ns</td></tr><tr><td>L3</td><td>~15–20 ns</td></tr><tr><td>RAM (DDR5)</td><td><strong>~80–90 ns</strong></td></tr><tr><td>SSD NVMe</td><td><strong>~50 000–100 000 ns</strong></td></tr><tr><td>HDD</td><td>5 000 000–15 000 000 ns</td></tr></tbody></table></div>
+<p>Dostęp do L1d to 0,3 ns, a do dysku SSD to 100 000 ns — <strong>pięć rzędów wielkości</strong>. Dlatego gry, które nie mieszczą się w cache'u, tracą wydajność w sposób, który <strong>nie ma nic wspólnego z mocą obliczeniową</strong>, a objawia się dokładnie tak samo: spadkami FPS.</p>
+<p><strong>Wniosek praktyczny:</strong> jeśli gra korzysta z 6 GB RAM-u, a Ty masz 8 GB, część danych jest wyrzucana na dysk. Przy 16 GB na grę aktywnie zużywającą 12 GB wchodzisz w tryb cachowania na dysku — <strong>dla procesora wygląda to jak blokada na kilka milisekund</strong>.</p>
+<h3 id="draw-calle-i-kolejka-polecen">Draw calle i kolejka poleceń</h3>
+<p><strong>Koszt draw callu leży po stronie procesora, nie karty.</strong> Silnik, który generuje dziesiątki tysięcy draw callów na klatkę, przy limicie jednego wątku CPU daje setki milisekund i natychmiastowy efekt — gra działa w 5 FPS <strong>niezależnie od tego, jak potężna jest Twoza karta</strong>.</p>
+<p><strong>Rozpoznanie CPU bottleneck w praktyce:</strong> obniżasz rozdzielczość — FPS się nie zmienia; obniżasz szczegóły graficzne — rośnie niewiele; zmieniasz kółko — bez zmian. Ale obniżasz liczbę cieni, AO, refleksji, gęstości mgły, jakość tekstur — <strong>rośnie znacząco</strong>. Jeśli wszystkie cztery odpowiedzi brzmią „tak&quot;, Twój wątek jest zablokowany.</p>
+<h2 id="1-5-buforowanie-wyswietlania-dwm-flip-i-frame-pacing">1.5 Buforowanie wyświetlania: DWM, flip i frame pacing</h2>
+<p><strong>DWM</strong> (Desktop Window Manager) komponuje obraz. Każda aplikacja — również gra — nie ma bezpośredniego dostępu do ekranu: renderuje do bufora off-screen, a DWM składa to z innymi oknami. <strong>W grach na Windows zawsze działa dodatkowa warstwa po kompozycji.</strong></p>
+<h3 id="model-blit-kontra-flip">Model blit kontra flip</h3>
+<p><strong>BLIT (domyślny):</strong> <code>[Klatka w pamięci] → kopiowanie → [Bufor ekranu] → skanowanie</code> Kopia to setki MB/s przepustowości pamięci i obciążenie procesora.</p>
+<p><strong>FLIP:</strong> <code>[Bufor A] ←→ [Bufor B] → skanowanie</code> — zamiana wskaźników, ~0,01 ms. Eliminuje koszt kopii całkowicie.</p>
+<p>Rozwiązanie jest znane od lat. Nie każda gra używa go automatycznie: flip wymaga obsługi DWM i sterownika, starsze Windowsy były mniej niezawodne, a tryby okienkowe i hybrydowe (laptop z dwiema GPU) często go omijają. <strong>To jest miejsce, w którym warto sprawdzić, co robi Twoja gra.</strong></p>
+<h3 id="frame-pacing-regularnosc-jest-wazniejsza-niz-szybkosc">Frame pacing — regularność jest ważniejsza niż szybkość</h3>
+<pre data-lang=""><code>Dobre pacowanie:   klatki co 7 ms  → regularny rytm → płynny ruch
+Złe pacowanie:     0, 1, 2, 40, 41, 42 ms  → ruch skokowy mimo tego samego FPS</code></pre>
+<p>Windows udostępnia mechanizm <strong>waitable object</strong>: aplikacja mówi systemowi „potrzebuję 16,67 ms od momentu, gdy poprzednia klatka <strong>została wyświetlona</strong>&quot;. Kluczowa różnica — liczy się czas od faktycznego wyświetlenia, nie od zakończenia renderowania. To eliminuje jitter.</p>
+<p><strong>Dlatego zbyt wysoki FPS bywa szkodliwy.</strong> Przy renderowaniu w 3 ms na monitorze 60 Hz bez V-Syncu wysyłasz 333 klatki/s, a monitor wyświetla 60 — <strong>23 z 24 klatek jest odrzucanych</strong>, procesor pracuje na 100% bez powodu. Dobrze skonfigurowany system ogranicza FPS do <strong>częstotliwości odświeżania lub jej małego ułamka</strong> (np. 3× — dla 144 Hz daje 432, limitowane w praktyce do 240–300).</p>
+<h3 id="vsync-adaptive-sync-i-pulapka-konfiguracji">VSync, Adaptive Sync i pułapka konfiguracji</h3>
+<p><strong>V-Sync</strong> blokuje prezentację klatki do momentu skanowania monitora. Eliminuje tearing, ale <strong>dodaje opóźnienie</strong> (16–33 ms przy 60 Hz). Jeśli czas renderowania jest niestabilny, V-Sync powoduje <strong>podwójne czekanie</strong> — klatka czeka całe 16,67 ms zamiast zostać wyświetlona później, ale wcześniej. To klasyczny stutter pod V-Synciem.</p>
+<p><strong>FreeSync / G-Sync</strong> to zmienna częstotliwość odświeżania: monitor dostosowuje takt do faktycznie dostarczanej liczby klatek. Eliminuje podwójne czekanie.</p>
+<blockquote><p><strong>Gdy włączony jest G-Sync/FreeSync, V-Sync w grze powinien być WŁĄCZONY, a w panelu NVIDIA: „V-Sync&quot; ON, „Tryb V-Sync sterownika&quot; OFF.</strong></p></blockquote>
+<p>Bez V-Sync Adaptive Sync nie działa poprawnie — karta wysyła klatki „jak najszybciej&quot;, monitor nie ma jak ich zatrzymać, i przy wzroście powyżej zakresu nagła zmiana zachowania.</p>
+<p><strong>Pułapka:</strong> jeśli system <strong>nie utrzymuje górnego zakresu</strong> częstotliwości monitora, Adaptive Sync <strong>przestaje działać</strong>, wracasz do V-Sync i dostajesz podwójne czekanie. Dlatego tak mocno walczymy o <strong>1% Low</strong> — on decyduje, czy Adaptive Sync jest Twoim przyjacielem, czy wrokiem.</p>
+<h2 id="1-6-realna-latencja-monitora">1.6 Realna latencja monitora</h2>
+<p>Monitor LCD wyświetla obraz metodą <strong>skanowania</strong> — piksele od góry do dołu, od lewej do prawej. W 144 Hz przejście panelu trwa 6,94 ms, więc obraz czeka średnio połowę okresu. Deklarowany „response time 1 ms GtG&quot; <strong>nie jest</strong> opóźnieniem od sygnału do pikseli — realnie to <strong>8–15 ms</strong> dla monitorów gamingowych, 4–6 ms dla najlepszych.</p>
+<p><strong>Wniosek:</strong> przejście z 60 Hz na 240 Hz daje nie tylko 4× więcej klatek, ale też <strong>4× mniejsze opóźnienie wyświetlania</strong>. To często ważniejsza różnica niż dodatkowe FPS. <strong>Overdrive</strong> ma tę samą wadę: zbyt silny daje overshoot i migotanie, zbyt słaby smugi za obiektami. Oba kosztują gracza, ale w różnych sytuacjach — w FPS-ach czytelność celów jest ważniejsza niż smugi.</p>
+<h2 id="1-7-mitologia-czyszczenia-kontra-inzynieria-systemowa">1.7 Mitologia czyszczenia kontra inżynieria systemowa</h2>
+<p>Prześledźmy to, co naprawdę się dzieje:</p>
+<blockquote><p>Gracz: „Komputer mi wolnieje, działał szybko.&quot; Kolega: „Wrzuć ten Optimizer.exe.&quot; Po instalacji FPS skacze z 90 na 130. Post udostępniony 40 tys. razy.</p></blockquote>
+<p><strong>Krok 1: restart.</strong> Optymalizator i tak wymusza restart. System faktycznie działa lepiej, ale nie dlatego, że program coś „oczyścił&quot; — usługi drugiego planu wstrzymały pracę, sterownik graficzny się przeładował, pliki tymczasowe zostały zwolnione.</p>
+<p><strong>Placebo i restart.</strong> Optymalizator i tak wymusza restart — system naprawdę działa lepiej, ale nie dlatego, że program coś „oczyścił&quot; (szczegóły w 2.2).</p>
+<p><strong>Nieskuteczność kontrolowana.</strong> Gdyby efekt był trwały, optymalizator byłby zauważalny. Jest odwrotnie — rekomenduje się go „raz w tygodniu&quot;, co jest klasycznym sygnałem, że działa losowo, czyli że to placebo.</p>
+<div class="table-wrap"><table><thead><tr><th>Czynność</th><th>Realny wpływ</th></tr></thead><tbody><tr><td>Usunięcie plików tymczasowych</td><td>Minimalny</td></tr><tr><td>Defragmentacja SSD</td><td><strong>Ujemny</strong> (skraca żywotność, nie daje zysku)</td></tr><tr><td>„Oczyszczenie rejestru&quot; CCLeanerem</td><td><strong>Brak</strong> lub szkodliwy</td></tr><tr><td>Restart</td><td>Znaczący, ale tymczasowy</td></tr><tr><td>Wyłączenie zbędnych usług startowych</td><td><strong>Znaczący</strong> (to zadanie dla fachowca)</td></tr><tr><td>Usunięcie shader cache</td><td><strong>Pogarsza</strong> — patrz 4.1</td></tr><tr><td>Plan zasilania → Najwyższa wydajność</td><td><strong>Znaczący</strong></td></tr></tbody></table></div>
+<p><strong>O „zapełnieniu dysku&quot;:</strong> Twój dysk nie działa wolniej dlatego, że jest pełny w 87% — na SSD z NTFS i włączonym TRIM to nie działa. Odzyskanie utraconej wydajności to ułamek procenta. <strong>Minimum 15–20% wolnego miejsca</strong> utrzymujemy nie dla FPS, lecz dlatego, że bez tego nie zaktualizujesz systemu.</p>
+<p><strong>O rozmiarze rejestru:</strong> to mit sprzed 20 lat. Rejestr to zwykle 200–500 MB, z czego większość jest cache'owana w RAM. <strong>Czyszczenie rejestru to operacja, która może uszkodzić system dla zysku równego zero.</strong> Nie używaj CCLeanera. Nigdy.</p>
+<h2 id="1-8-fabryczny-windows-11-i-jego-sabotaz">1.8 Fabryczny Windows 11 i jego sabotaż</h2>
+<p>Windows 11 zawiera mechanizmy, które <strong>aktywnie obniżają wydajność w grach</strong> — i robi to z uzasadnionych komercyjnych powodów, które nie są Twoimi powodami.</p>
+<div class="table-wrap"><table><thead><tr><th>Mechanizm</th><th>Koszt dla gracza</th></tr></thead><tbody><tr><td><strong>Telemetria</strong> (Diagtrack, Diagsched, ACA)</td><td>Zadania w tle + planowanie, kompresja, szyfrowanie; przy wysokim priorytecie potrafią blokować wątek gry</td></tr><tr><td><strong>Plan „Zrównoważony&quot;</strong></td><td>Max stan procesora <strong>99%</strong> + wysokie EPP — patrz 4.4</td></tr><tr><td><strong>Memory Integrity (VBS/HVCI)</strong></td><td>Hypervisor na warstwie każdego wywołania systemowego; do ~10% wg Microsoftu</td></tr><tr><td><strong>Sprite / GPU accel dla konsol</strong> (24H2)</td><td>Regresja, wycofana po interwencji społeczności</td></tr><tr><td><strong>GameDVR w tle</strong></td><td>Przechwytywanie i kompresja ramek podczas gry</td></tr><tr><td><strong>SysMain (Superfetch)</strong></td><td>Na SSD z NVMe generuje niepotrzebny ruch dysku</td></tr><tr><td><strong>Fast Startup</strong></td><td>Na SSD zysk minimalny, ryzyko dziwnych zachowań realne</td></tr><tr><td><strong>Secure Boot / TPM</strong></td><td>Nie mierzy się jako FPS, ale blokuje część modyfikacji</td></tr></tbody></table></div>
+<p><strong>Telemetria wyłączamy na poziomie polityki systemowej</strong> (klucze w <code>HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection</code>), nie przez „aplet&quot; w Ustawieniach — poziom Ustawień jest nadpisaniem tymczasowym, które aktualizacja może przywrócić. Polityka jest trwała.</p>
+<p><strong>To nie jest legalne unikanie płacenia za Windows</strong> i nie wpływa na aktywację ani licencję. Wpływa wyłącznie na gromadzenie danych. To są dwie różne kwestie.</p>
+<p><strong>Memory Integrity</strong> kosztuje tylko wtedy, gdy hypervisor jest uruchamiany. Jeśli ją wyłączasz — rób to świadomie, z pełną świadomością konsekwencji, i miej backup. To nie jest „hack&quot;, to decyzja o powierzchni ataku: gracz grający wyłącznie ze Steam nie potrzebuje ochrony przed atakami na sterowniki złośliwego oprogramowania wykorzystujące luki w jądrze.</p>
+<p><strong>Zasada Tweakify:</strong> po każdej dużej aktualizacji Windows <strong>przetestuj ustawienia od nowa</strong>. Funkcje, które zostały wyłączone, bo psuły gry, <strong>wracają</strong> w kolejnych aktualizacjach.</p>
+<h2 id="1-9-podsumowanie-trzy-typy-przegrzania">1.9 Podsumowanie — trzy typy przegrzania</h2>
+<p>Opóźnienie nigdy nie wynika z jednej przyczyny. Zawsze z przegrzania konkretnego punktu łańcucha:</p>
+<ol>
+<li><strong>Przegrzanie mocy</strong> — zabrakło CPU albo GPU. W dobrym systemie rzadkie.</li>
+<li><strong>Przegrzanie przepustowości</strong> — zabrakło RAM-u albo PCIe.</li>
+<li><strong>Przegrzanie harmonogramu</strong> — <strong>najczęstsze i najbardziej niezrozumiałe.</strong> Zabrakło <strong>determinizmu</strong>. System ma moc i przepustowość, ale nie kontroluje tego, kiedy dokładnie wykonuje pracę.</li>
+</ol>
+<p><strong>Cała ta książka jest o przegrzaniu harmonogramu.</strong> Twój sprzęt prawdopodobnie już wystarczy — oddajesz 10–40% jego możliwości na decyzje podjęte przez system, którego celem nie jest Twoja czysta klatka, tylko zgodność z regulacjami i strategią przychodową producenta.</p>
+<hr>
+<h1 id="rozdzial-2-samemu-kontra-pro" class="chapter chapter--part">ROZDZIAŁ 2 — SAMEMU KONTRA PRO</h1>
+<h2 id="2-1-anatomia-game-boostera">2.1 Anatomia „Game Boostera&quot;</h2>
+<p>„Game Booster&quot; to nazwa marketingowa, pod którą ukrywa się jedna z czterech kategorii oprogramowania. Każda działa inaczej i ma inne ryzyko — ale prawie <strong>żadna nie robi tego, co obiecuje</strong>.</p>
+<p><strong>1. Pobierznik sterowników i „cleanupów&quot;.</strong> Ściąga pliki <code>.exe</code>/<code>.sys</code>/<code>.bat</code> z niegovernmentowego serwera i uruchamia z uprawnieniami administratora. Ryzyko: <strong>niesygnowany kod jądra z nieznanego źródła</strong>, bez możliwości weryfikacji.</p>
+<p><strong>2. Legalny „cleaner&quot; z monetyzacją.</strong> Czasem robi użyteczne rzeczy, ale wersja darmowa <strong>wyłącza usługi systemowe</strong>, których nie rozumie.</p>
+<p><strong>3. „Registry Cleaner&quot; + „Defragmenter&quot;.</strong> Najbardziej niebezpieczna klasa — miała udokumentowane skandale z systemami, które nie startowały. Zawodowcy w ogóle ich nie używają.</p>
+<p><strong>4. Złośliwe oprogramowanie (PUP/malware).</strong> Najpoważniejsza podkategoria.</p>
+<div class="table-wrap"><table><thead><tr><th>Obietnica</th><th>Rzeczywistość</th></tr></thead><tbody><tr><td>„+50% FPS&quot;</td><td>Restart i placebo. Realnie 0–5%</td></tr><tr><td>„Usuwa bloatware&quot;</td><td>Usuwa usługi systemowe. Często wyłącza Windows Update</td></tr><tr><td>„Optymalizuje rejestr&quot;</td><td>Usuwa klucze, których nie zna. Ryzyko błędu startu</td></tr><tr><td>„Defragmentuje dysk&quot;</td><td>Uruchamia defrag na SSD. Skraca żywotność</td></tr><tr><td>„Czyści pamięć RAM&quot;</td><td>Wywołuje <code>EmptyStandbyList</code>. Tymczasowy efekt, <strong>przed grą szkodliwy</strong></td></tr><tr><td>„Optymalizuje sieć&quot;</td><td>Ustawia DNS na ich serwer (tracking) albo 8.8.8.8</td></tr></tbody></table></div>
+<p><strong>O „czyszczeniu pamięci RAM&quot;:</strong> mit sprzed Windowsa 98. <code>EmptyStandbyList()</code> zmusza system do natychmiastowego zrzucenia buforów, po czym kilka minut odtwarza je z dysku. <strong>Zrobione przed grą to jest dokładnie odwrotność tego, czego chcesz</strong> — pierwsze minuty rozgrywki idą z odtwarzania stron z dysku.</p>
+<h2 id="2-2-cyfrowe-placebo">2.2 Cyfrowe placebo</h2>
+<p>Twoja ocena płynności gry jest subiektywna i podatna na wpływ oczekiwań. Badania nad interfejsami pokazują, że zmiana interfejsu sugerująca szybkość <strong>zmniejsza czas reakcji użytkownika</strong>, nawet gdy wydajność się nie zmieniła. Efekt jest <strong>asymetryczny</strong>: poprawę zauważasz, regresję nie.</p>
+<p>Twoje odczucie „zrobiłem 300 FPS&quot; podlega trzem zniekształceniom: pamiętasz dawną średnią niedokładnie; po 15 minutach mózg przyjmuje nową wartość za normę; i <strong>potwierdzasz hipotezę</strong> („widziałeś? działa&quot;).</p>
+<blockquote><p><strong>Twoja subiektywna ocena efektu optymalizacji jest systematycznie zawodna.</strong> Dlatego w Tweakify nie pytamy „czy czujesz, że jest lepiej?&quot;. Pytamy: <strong>pokaż wykres frametime'ów przed i po</strong>.</p></blockquote>
+<p><strong>Jak zbudować odpornosc na placebo:</strong> mierz zanim zmienisz cokolwiek; zmieniaj jedną rzecz naraz; testuj identycznie; powtórz pomiar trzy razy; patrz na <strong>1% Low</strong>, nie tylko na średnią.</p>
+<h2 id="2-3-ukryte-zagrozenia">2.3 Ukryte zagrożenia</h2>
+<p><strong>Rejestr.</strong> Kasowanie złego klucza powoduje system, który nie startuje, albo objawy pojawiające się <strong>tygodnie lub miesiące później</strong>, gdy zanika związek przyczynowy. Programy czyszczące używają heurystyki „klucz nieużywany od 6 miesięcy, usuwam&quot; — a klucze nieczytane dziś bywają krytyczne jutro, i niektóre są tworzone <strong>wyłącznie w sytuacjach awaryjnych</strong>.</p>
+<p><strong>Usługi.</strong> Typowy „booster&quot; wyłącza je po prostej liście nazw, bez rozumienia:</p>
+<div class="table-wrap"><table><thead><tr><th>Usługa</th><th>Skutek wyłączenia przez „boostera&quot;</th></tr></thead><tbody><tr><td><code>wuauserv</code> (Windows Update)</td><td><strong>Brak poprawek bezpieczeństwa</strong></td></tr><tr><td><code>BITS</code></td><td>Aktualizacje mogą się nie dokończyć</td></tr><tr><td><code>CryptSvc</code></td><td>Problemy z HTTPS, aktualizacjami, DRM</td></tr><tr><td><code>SysMain</code></td><td>Na HDD: spadek wydajności startu</td></tr><tr><td><code>DiagTrack</code></td><td><strong>Tu wyłączenie jest OK i zalecane</strong></td></tr></tbody></table></div>
+<p>Lista „usług do wyłączenia&quot; <strong>nie istnieje w formie uniwersalnej</strong>. Istnieje analiza zależności. To jest praca, która zajmuje godziny, a nie kliknięcie — i dokładnie ten powód, dla którego ta usługa kosztuje pieniądze.</p>
+<p><strong>Malware.</strong> Najczęstsza droga zakażenia u gracza to nie exploit w grze, lecz pobranie „boostera&quot; albo „cracka&quot;. Program jest w porządku technicznie, nie ma antywirusa, jest powiązany z „darmową&quot; grą, a użytkownik instaluje go z wyłączonym antywirusem. <strong>Konsekwencja: system zainstalowany przez niezaufane narzędzie traktuj jako potencjalnie skażony, do czasu skanowania offline.</strong> Optymalizacja zaufanego systemu jest bezużyteczna, jeśli system jest skażony.</p>
+<h2 id="2-4-booster-jako-generator-mikrostutteringu">2.4 Booster jako generator mikrostutteringu</h2>
+<p>Mechanizm jest prosty i wyjaśnia dokładnie ten objaw, przed którym szukano leku.</p>
+<p><strong>Wariant 1 — „monitoring w tle&quot;.</strong> Program regularnie odczytuje temperatury, częstotliwości i stan dysku. To wymaga <strong>odpytywania sterowników systemowych</strong>, często z powrotem do trybu jądra. To jest dokładnie profil dostępu typowy dla DPC.</p>
+<p><strong>Wariant 2 — „automatyczna optymalizacja w tle&quot;.</strong> Cykliczne modyfikowanie ustawień, operacje na plikach, skanowanie rejestru. Ciągła praca dyskowa i pamięciowa na tle systemu.</p>
+<blockquote><p>Gracz skarży się na <strong>mikrostuttering</strong>. Instaluje <strong>boostera</strong>, żeby go usunąć. Booster <strong>dodaje do systemu ciągłą pracę w tle i generator DPC</strong>. Mikrostuttering się <strong>pogarsza</strong>. Gracz dodaje <strong>drugiego boostera</strong>. System ma teraz <strong>trzy</strong> narzędzia walczące o ten sam zasób.</p></blockquote>
+<p><strong>Rozwiązanie:</strong> odinstalować całkowicie (także usługę i autostart), usunąć pozostałości, przeskanować offline, uruchomić LatencyMon ponownie i <strong>porównać wykresy przed i po</strong>. Po zabiegu jest „prawdopodobnie lepiej&quot;. Po inżynierii jest pomiar.</p>
+<h2 id="2-5-metodologia-tweakify-szesc-faz">2.5 Metodologia Tweakify — sześć faz</h2>
+<p>Produktem, który sprzedajemy, jest <strong>proces decydyjny</strong>, nie skrypt.</p>
+<p><strong>Faza 0 — Zabezpieczenie (bez wyjątków).</strong> Punkt przywracania + eksport kluczy rejestru, które będziemy dotykać + zrzut stanu systemu (usługi, autostart, plany zasilania, wersje sterowników). <strong>Zasada: jeśli nie jesteśmy w stanie cofnąć zmiany w 60 sekund, nie wykonujemy jej.</strong></p>
+<p><strong>Faza 1 — Diagnoza.</strong> <strong>Nie zmieniamy NICZEGO</strong>, dopóki nie odpowiemy na pytanie: co konkretnie dusi ten konkretny komputer? Zbieramy sprzęt, temperatury, efektywny takt CPU, obciążenie I/O, LatencyMon, procesy w tle, plan zasilania, benchmark bazowy z zapisem frametime'ów. <strong>Rezultat: raport „PRZED&quot; — zawsze.</strong></p>
+<p><strong>Faza 2 — Hipoteza.</strong> Przykład poprawnej: <em>„Plan Zrównoważony, EPP wysokie, max stan 99% — efektywny takt spada o ~380 MHz. Hipoteza: Najwyższa wydajność podniesie CPU-bound FPS o 5–8%.&quot;</em> Każda hipoteza musi zawierać: co zmieniamy, dlaczego spodziewamy się poprawy i <strong>jak ją zweryfikujemy</strong>.</p>
+<p><strong>Faza 3 — Zmiana.</strong> Jedna naraz. Odwracalna (mamy komendę „cofnij&quot;), udokumentowana (co, gdzie, kiedy, po co), bezpieczna.</p>
+<p><strong>Faza 4 — Weryfikacja.</strong> Powtarzamy pomiar w identycznych warunkach:</p>
+<div class="table-wrap"><table><thead><tr><th>Metryka</th><th>Przed</th><th>Po</th><th>Różnica</th></tr></thead><tbody><tr><td>Średni FPS</td><td>214</td><td>241</td><td>+12,6%</td></tr><tr><td><strong>1% Low</strong></td><td>128</td><td><strong>171</strong></td><td><strong>+33,6%</strong></td></tr><tr><td>Frame time 99,9%</td><td>38 ms</td><td>21 ms</td><td>−17 ms</td></tr><tr><td>Temperatura CPU</td><td>78 °C</td><td>71 °C</td><td>−7 °C</td></tr><tr><td>DPC maks.</td><td>1450 µs</td><td>210 µs</td><td>−1240 µs</td></tr></tbody></table></div>
+<p><strong>Wzorzec, na który celujemy:</strong> średni FPS rośnie umiarkowanie, <strong>1% Low rośnie znacząco</strong>, frame time 99,9% spada dramatycznie, temperatura spada, DPC spada.</p>
+<p><strong>Uwaga na oszustwo:</strong> jeśli ktoś pokazuje wzrost średniej o 50% przy wzroście 1% Low o 5%, to prawdopodobnie <strong>obniżył jakość obrazu</strong>. Zniżenie jakości zawsze daje wzrost FPS. Nie jest to optymalizacja — to obniżenie standardu.</p>
+<p><strong>Faza 5 — Raport i utrzymanie.</strong> Lista zmian z uzasadnieniem, porównanie pomiarów, <strong>z zaleceniami, których nie zrobiliśmy, i powodem</strong>, punkt przywracania i plan kontroli. Optymalizacja <strong>nieaktualizowalna</strong> — po aktualizacji sterownika część ustawień może zniknąć albo zyskać nowe znaczenie.</p>
+<h2 id="2-6-porownanie-metod">2.6 Porównanie metod</h2>
+<div class="table-wrap"><table><thead><tr><th>Kryterium</th><th>Metoda amatorska</th><th>Metoda Tweakify</th></tr></thead><tbody><tr><td>Punkt wyjścia</td><td>„Komputer jest wolny&quot;</td><td>Konkretna diagnoza sprzętu i systemu</td></tr><tr><td>Zmiany</td><td>Masowe, losowe, setki wpisów</td><td>Punktowe, jedna naraz, każda z hipotezą</td></tr><tr><td>Odwracalność</td><td>Brak — nie wiadomo, co zmieniono</td><td>Eksport rejestru + punkt przywracania</td></tr><tr><td>Pomiary</td><td>„Wygląda lepiej&quot;</td><td>Twarde liczby: frametime, 1% Low, temperatury, DPC</td></tr><tr><td>Trwałość</td><td>Do restartu lub aktualizacji</td><td>Trwałe, z planem kontroli</td></tr><tr><td>Koszt</td><td>350–500 zł za skryptowy booster</td><td>40 zł / 45 zł / 75 zł (pakiety)</td></tr><tr><td>Czas</td><td>10 sekund</td><td>60–90 minut</td></tr></tbody></table></div>
+<p><strong>Nie dlatego, że jesteśmy wolni — dlatego, że robimy inną pracę.</strong></p>
+<hr>
+<h1 id="rozdzial-3-obalamy-wielkie-mity-gamingu" class="chapter chapter--part">ROZDZIAŁ 3 — OBALAMY WIELKIE MITY GAMINGU</h1>
+<h2 id="3-1-mit-1-mam-potezny-sprzet-wiec-optymalizacja-jest-zbedna">3.1 Mit 1: „Mam potężny sprzęt, więc optymalizacja jest zbędna&quot;</h2>
+<p>Rozumiemy ten mit — kupno drogiego komputera daje ogromną satysfakcję. Problem w tym, że <strong>„jest dobrze&quot; i „jest optymalnie&quot; to dwa różne stany.</strong></p>
+<p>Weźmy Ryzen 7 7800X3D, jedną z najszybszych jednordzeniowych jednostek do gier. Na papierze: boost 5,0 GHz. Co robi z nim fabryczny Windows 11?</p>
+<ol>
+<li>Używa planu <strong>„Zrównoważony&quot;</strong> — z limitem <strong>99%</strong> i wysokim EPP.</li>
+<li><strong>Memory Integrity ON</strong> — hypervisor na każdym wywołaniu systemowym.</li>
+<li><strong>Nie konfiguruje</strong> priorytetów MMCSS pod gry.</li>
+<li><strong>XMP/EXPO wyłączony</strong> — pamięć działa w trybie JEDEC: DDR5-4800 CL40 zamiast DDR5-6000 CL30.</li>
+</ol>
+<p><strong>Skutek praktyczny:</strong> efektywny takt pod obciążeniem jednego rdzenia <strong>4,4–4,6 GHz zamiast 5,0 GHz</strong> (8–12% utraconej mocy jednordzeniowej), pamięć o 40% gorsza pod względem opóźnienia. <strong>Sumując: 20–30% mocy procesora, która jest fizycznie w Twoim chipie, jest niedostępna, dopóki jej nie odblokujesz.</strong></p>
+<h3 id="architektura-pamieci">Architektura pamięci</h3>
+<p>Z 16 GB RAM realnie dostępne dla procesów jest ~13,5 GB (reszta to rezerwa sprzętowa, pule jądra, bufory DMA i plik stronicowy). System zarządza stronami dynamicznie i dopóki gra używa 6 GB, wszystko działa. <strong>Problem pojawia się, gdy aktywnie używane dane zbliżają się do granicy</strong> — wtedy system wypycha strony na dysk, a odczyt z NVMe to ~50–100 µs wobec 0,7 ns z RAM-u. Wątek gry czekający na stronę z dysku to natychmiast widoczny skok frametime'u.</p>
+<p><strong>Dlatego RAM-u powinno być „wystarczająco z zapasem&quot;, a nie „dokładnie tyle, ile gra używa&quot;.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Sytuacja</th><th>Zalecenie</th></tr></thead><tbody><tr><td>1080p, VALORANT, CS2, LoL, Minecraft</td><td>16 GB — absolutne minimum</td></tr><tr><td>1440p, nowsze tytuły, multitasking, OBS</td><td>32 GB — <strong>zalecane minimum</strong></td></tr><tr><td>4K, mody, streaming</td><td>64 GB</td></tr></tbody></table></div>
+<h3 id="narzut-sterownika-ukryty-koszt">Narzut sterownika — ukryty koszt</h3>
+<p>Typowy proces podczas gry: gra 12–22%, System 2–5%, antywirus 1–8%, przeglądarka w tle 5–25%, Discord 2–8%.</p>
+<p><strong>Te 2–8% to nie jest 2–8% wydajności.</strong> W systemie, w którym gra jest ograniczona przez <strong>jeden wątek</strong>, obciążenie wątków współdzielonych działa nieproporcjonalnie — każdy procent CPU w tle to potencjalny procent z rdzenia, o który walczy wątek gry. <strong>Zamknięcie Discorda, przeglądarki i Steam przed grą to nie fanaberka — to usunięcie konkurenta o ten sam procesor.</strong></p>
+<h2 id="3-2-mit-2-wiecej-ram-u-i-drozsze-podzespoly-zalatwia-problem">3.2 Mit 2: „Więcej RAM-u i droższe podzespoły załatwią problem&quot;</h2>
+<p>To najbardziej złośliwy mit, bo prowadzi do wydawania setek złotych na rozwiązania, które nie rozwiązują problemu.</p>
+<p><strong>RAM ma trzy parametry. Ludzie znają jeden.</strong></p>
+<ul>
+<li><strong>Pojemność</strong> (GB) — ile danych pomieści.</li>
+<li><strong>Częstotliwość</strong> (MHz) — ile operacji na sekundę. To <strong>przepustowość</strong>.</li>
+<li><strong>Opóźnienie</strong> (CL) — ile cykli czekać na wynik. To <strong>czas odpowiedzi</strong>.</li>
+</ul>
+<p>Częstotliwość i CL działają razem i tworzą jedną liczbę — rzeczywiste opóźnienie:</p>
+<pre data-lang=""><code>opóźnienie (ns) = (CL / częstotliwość) × 2000</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Konfiguracja</th><th>CL</th><th>Częstotliwość</th><th>Rzeczywiste opóźnienie</th></tr></thead><tbody><tr><td>DDR5-4800</td><td>40</td><td>2400 MHz</td><td><strong>33,3 ns</strong></td></tr><tr><td>DDR5-6000</td><td>36</td><td>3000 MHz</td><td><strong>24,0 ns</strong></td></tr><tr><td>DDR5-6000</td><td>30</td><td>3000 MHz</td><td><strong>20,0 ns</strong></td></tr><tr><td>DDR5-7200</td><td>34</td><td>3600 MHz</td><td><strong>18,9 ns</strong></td></tr></tbody></table></div>
+<p>Ten sam „typ pamięci DDR5&quot;, ta sama liczba modułów. <strong>Różnica w czasie odpowiedzi: 1,76 raza.</strong> Gry wykonują ogromną liczbę losowych odczytów — gdy trafiają w L3 (15–20 ns) jest dobrze, gdy w DRAM (20–33 ns) gorzej, gdy na dysk — katastrofa. To przekłada się bezpośrednio na <strong>1% Low</strong>.</p>
+<h3 id="xmp-expo-najwazniejsze-ustawienie-w-calym-komputerze">XMP/EXPO — najważniejsze ustawienie w całym komputerze</h3>
+<p>Jeśli kupujesz pamięć „6000 MHz&quot;, to jest <strong>nieprawda, dopóki nie włączysz XMP (Intel) lub EXPO (AMD)</strong>. Płyta startuje w trybie bezpiecznym JEDEC: <strong>DDR5-4800 CL40, czyli 33,3 ns zamiast 20 ns — tracisz 40% wydajności pamięci</strong> i zapłaciłeś pełną cenę. To najczęstszy ukryty defekt konfiguracji, jaki widzimy w praktyce.</p>
+<p>Profil XMP/EXPO oznacza podwyższone napięcie (1,25–1,35 V zamiast 1,1 V) — zgodne z projektem, ale wymaga odpowiedniego chłodzenia modułów.</p>
+<p><strong>Jeśli system nie startuje po włączeniu XMP:</strong> obniż częstotliwość o jeden krok (6000 → 5600), spróbuj zmniejszyć napięcie, dodaj napięcie SoC, a w ostatiej kolejności wyłącz XMP. <strong>Obowiązkowo przetestuj stabilność pamięci</strong> (OCCT, y-cruncher, MemTest86). Jeśli test nie przechodzi — cofnij albo obniż.</p>
+<h3 id="kanaly">Kanały</h3>
+<p><strong>Single channel → dual channel to +15–25% FPS</strong> — największa pojedyncza różnica pamięciowa. Na AMD AM5 są <strong>dwa kanały</strong>, więc dwa moduły są prawie zawsze lepsze niż cztery. Moduły <strong>dual-rank</strong> (dwa niezależne zestawy kości) dają lepszą wydajność niż single-rank, bo kontroler ma więcej operacji do zrównoleżlenia — to jedno z miejsc, gdzie droższe naprawdę znaczy szybsze.</p>
+<div class="table-wrap"><table><thead><tr><th>Scenariusz</th><th>Wpływ</th></tr></thead><tbody><tr><td>DDR5-4800 CL40 → DDR5-6000 CL30</td><td><strong>+5–12% FPS</strong> w grach zależnych od CPU</td></tr><tr><td>Single channel → dual channel</td><td><strong>+15–25% FPS</strong></td></tr><tr><td>Podniesienie częstotliwości GPU o 100 MHz</td><td><strong>+1–3% FPS</strong></td></tr></tbody></table></div>
+<p><strong>Przeskok pamięci jest równy lub większy niż podkręcenie GPU o 100 MHz, a kosztuje często zero — wystarczy włączyć XMP.</strong></p>
+<h3 id="drozsze-podzespoly">„Droższe podzespoły&quot;</h3>
+<p>Logika się załamuje w trzech miejscach: kupujesz pod komponenty, których scenariusz nie dotyczy; „najdroższy model&quot; przegrywa z tańszym (<strong>Ryzen 9 7950X bywa wolniejszy w grach niż Ryzen 7 7800X3D</strong>, bo tamten ma 3D V-Cache, czyli dodatkowe 96 MB L3 — różnica 15–25% na korzyść tańszego); i kupujesz wąskie gardło, którego nie masz (karta za 12 000 zł w komputerze z procesorem za 2500 zł daje <strong>dokładnie ten sam</strong> wynik co w lepszym procesorze, jeśli gra jest GPU-bound).</p>
+<h2 id="3-3-mit-3-slaby-komputer-jest-stracony">3.3 Mit 3: „Słaby komputer jest stracony&quot;</h2>
+<p>To najbardziej szkodliwy mit, bo <strong>pozbawia ludzi najlepszej dostępnej przewagi: świadomości, że mogą wygrać.</strong></p>
+<p><strong>Powód 1 — wartość bezwzględna.</strong> Fabrycznie 55 FPS → po optymalizacji 72 FPS to <strong>+17 FPS</strong>. U kogoś mocnego: 240 → 270 FPS to +30 FPS. Procentowo słaby sprzęt zyskuje znacznie więcej — a procentowo liczy się w rywalizacji.</p>
+<p><strong>Powód 2 — słaby sprzęt jest częściej źle skonfigurowany.</strong> Komputer z 8 GB RAM prawie na pewno ma wyłączony XMP, plan „Zrównoważony&quot;, pełen bloatware i nieaktywny tryb gry. <strong>Każda z tych rzeczy to zamrożone 10–25% wydajności.</strong></p>
+<p><strong>Powód 3 — wiedza się nie zużywa.</strong> Kupno lepszego sprzętu to inwestycja finansowa; optymalizacja to inwestycja w wiedzę.</p>
+<p><strong>Konkretna symulacja.</strong> Lenovo IdeaPad z i5-1135G7, 16 GB DDR4-3200 dual channel, NVMe i Intel Iris Xe: fabrycznie <strong>90–130 FPS</strong> w CS2/VALORANT/Fortnite, po sesji <strong>130–175 FPS</strong> przy lepszym 1% Low i niższej temperaturze. Zysk <strong>+40%</strong> — nie „naprawiliśmy&quot; sprzętu, tylko odblokowaliśmy to, co było zablokowane od fabryki.</p>
+<blockquote><p><strong>W e-sporcie wygrywa nie ten, kto ma najszybszy sprzęt. Wygrywa ten, kto ma sprzęt najbliższy swojej maksymalnej wydajności.</strong></p></blockquote>
+<p><strong>Uczciwie:</strong> przy procesorze sprzed 15 lat, 4 GB RAM i zintegrowanej grafice z 2012 roku żadna ilość rejestru nie stworzy brakujących rdzeni. Ale optymalizacja nadal ma dużą wartość: usunie bloatware, włączy tryb gry, włączy XMP, wyłączy telemetrię, ustawi plan i priorytety. <strong>To nie zamieni 20 FPS w 60 — ale 20 FPS na 30, a 30 FPS w grze sieciowej to różnica między „przegrywam każdą rundę&quot; a „mam szansę&quot;.</strong> Na słabym sprzęcie stabilizacja jest transformacją doświadczenia gry.</p>
+<h2 id="3-4-dwa-mity-bonusowe">3.4 Dwa mity bonusowe</h2>
+<p><strong>„Podkręcanie zawsze szkodzi.&quot;</strong> Nieprawda. Najbezpieczniejsza forma — <strong>undervolting</strong> — polega na obniżeniu napięcia. Każdy znak energii zamieniony na ciepło pochodzi z zużycia mocy, więc <strong>mniejsze napięcie → mniejsze ciepło → wyższy takt boost</strong>, który był ograniczony termicznie. Realnie: <strong>10–20 °C mniej i 5–10% więcej FPS</strong> w grach CPU-bound, plus cichszy wentylator. Ryzyko istnieje, ale jest kontrolowalne i odwracalne — dlatego robimy to metodą offsetu z obowiązkowym testem stabilności i cofaniem przy niepowodzeniu.</p>
+<p><strong>„Antywirus nie ma wpływu.&quot;</strong> Nieprawda. Antywirus przechwytywuje wywołania systemowe (minifiltr w jądrze), wstrzykuje DLL-e w procesy i skanuje w tle. Realne liczby: Windows Defender <strong>0–2%</strong> (dobrze), antywirus firmowy z aktywnym skanowaniem <strong>3–8%</strong>, z monitorowaniem procesów gry <strong>5–15%</strong>, plus booster i „cleaner&quot; <strong>10–25% i mikrostuttering</strong>.</p>
+<p><strong>Rekomendacja: nie usuwaj Defendera — skonfiguruj go.</strong> Dodaj foldery z grami i zrzutami do wyjątków skanowania w czasie rzeczywistym, ogranicz skany planowane do czasu, gdy nie grasz. To kompromis dający 90% zysku bez oddawania 100% bezpieczeństwa. Jeśli korzystasz z antywirusa firmowego — dodaj gry do listy wyjątków w module optymalizacji gier, jeśli taki istnieje.</p>
+<hr>
+<h1 id="rozdzial-4-praktyczny-warsztat-tweakify" class="chapter chapter--part">ROZDZIAŁ 4 — PRAKTYCZNY WARSZTAT TWEAKIFY</h1>
+<p><strong>Trzy zasady na cały rozdział:</strong> zmieniaj jedną rzecz na raz i mierz; nie rób niczego, czego nie rozumiesz; jeśli coś pójdzie nie tak — masz punkt odwrotu, bo zrobiłeś 4.0.</p>
+<h2 id="4-0-zanim-cokolwiek-zmienisz-protokol-bezpieczenstwa">4.0 Zanim cokolwiek zmienisz: protokół bezpieczeństwa</h2>
+<p><strong>Sekcja obowiązkowa. Nie pomijaj jej.</strong></p>
+<p><strong>Punkt przywracania:</strong> Panel sterowania → System → Ochrona systemu → Konfiguruj (w systemowym dysku C: włącz ochronę) → „Utwórz&quot; → nazwij <code>TWEAKIFY_PRECED_OPT</code>. <strong>Weryfikacja:</strong> data utworzenia punktu musi się pojawić. Brak daty = punkt nie istnieje, nie zaczynaj.</p>
+<p><strong>Eksport kluczy rejestru</strong> — CMD jako administrator:</p>
+<pre data-lang="cmd"><code>reg export &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; &quot;%USERPROFILE%\Desktop\backup-GraphicsDrivers.reg&quot; /y
+reg export &quot;HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile&quot; &quot;%USERPROFILE%\Desktop\backup-SystemProfile.reg&quot; /y
+reg export &quot;HKCU\System\GameConfigStore&quot; &quot;%USERPROFILE%\Desktop\backup-GameConfigStore.reg&quot; /y
+reg export &quot;HKLM\SOFTWARE\Microsoft\GameBar&quot; &quot;%USERPROFILE%\Desktop\backup-GameBar.reg&quot; /y
+reg export &quot;HKLM\SYSTEM\CurrentControlSet\Services\Tcpip&quot; &quot;%USERPROFILE%\Desktop\backup-Tcpip.reg&quot; /y</code></pre>
+<p><strong>Zrzut stanu</strong> (to jest dokumentacja Twojego systemu, której nikt nie ma):</p>
+<pre data-lang="cmd"><code>sc query state= all &gt; &quot;%USERPROFILE%\Desktop\uslugi-przed.txt&quot;
+powercfg /getactivescheme &gt; &quot;%USERPROFILE%\Desktop\plan-przed.txt&quot;
+reg query &quot;HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run&quot; &gt; &quot;%USERPROFILE%\Desktop\autostart-przed.txt&quot;</code></pre>
+<p>Trzy pytania przed startem: <strong>Czy rozumiem, dlaczego robię tę zmianę? Czy mam sposób na jej cofnięcie? Czy zmierzę efekt?</strong> Jeśli na którekolwiek odpowiedź brzmi „nie&quot; — wróć do 4.0 lub napisz na Discordzie.</p>
+<h2 id="4-1-pamiec-masowa-pliki-tymczasowe-i-cache-shaderow">4.1 Pamięć masowa, pliki tymczasowe i cache shaderów</h2>
+<h3 id="podsystem-i-o-warstwy">Podsystem I/O — warstwy</h3>
+<p><code>urządzenie → sterownik → bufor systemowy → harmonogram I/O → filtr minifiltrów (antywirus!) → NTFS → sterownik SSD (TRIM, SMART, GC) → komórki NAND</code>.</p>
+<p>Rozumienie tej warstwy wyjaśnia, dlaczego „wyczyść Temp&quot; to 0,1% problemu, a filtr antywirusa na I/O to 15% problemu.</p>
+<h3 id="czyszczenie-plikow-tymczasowych">Czyszczenie plików tymczasowych</h3>
+<pre data-lang="cmd"><code>cleanmgr /sageset:1      :: wybierz kategorie
+cleanmgr /sagerun:1      :: wykonaj
+:: zakładka „Wyczyść pliki systemowe&quot; daje dostęp do ~20–50 GB pobranych aktualizacji
+del /q /f /s &quot;%TEMP%\*&quot; 2&gt;nul
+net stop wuauserv &amp; del /q /f /s &quot;C:\Windows\SoftwareDistribution\Download\*&quot; 2&gt;nul &amp; net start wuauserv</code></pre>
+<p><strong>Realny zysk: zero FPS.</strong> Porządek i miejsce. Mniej niż nic w wydajności.</p>
+<p><strong><code>C:\Windows\Installer</code> — NIGDY nie usuwaj ręcznie.</strong> Tam są instalatory potrzebne do naprawy i odinstalowywania; bez niego uninstaller się załamuje.</p>
+<p><strong>Prefetch:</strong> mit sprzed Windowsa XP. Na SSD z NVMe pliki Prefetch generują niepotrzebny ruch; <strong>usunięcie daje efekt tylko na pierwszych kilku uruchomieniach</strong>, bo system je odtwarza. <strong>Nie usuwaj ręcznie katalogu.</strong></p>
+<h3 id="trim-defragmentacja-i-to-co-naprawde-wplywa-na-nvme">TRIM, defragmentacja i to, co naprawdę wpływa na NVMe</h3>
+<p><strong>TRIM to jedyna naprawdę ważna operacja na SSD.</strong> Informuje dysk, które bloki zwolniono. Dla HDD informacja o wolnym bloku jest oczywista; dla SSD — nie jest, bo komórki NAND wymagają złożonego odtworzenia danych.</p>
+<pre data-lang="cmd"><code>fsutil behavior query DisableDeleteNotify   :: 0 = TRIM włączony, nie rób nic</code></pre>
+<p><strong>„Defragmentacja&quot; SSD jest szkodliwa.</strong> Na dysku talerzowym fragmentacja wymaga wielu głowic. Na SSD kontroler ma wewnętrzne FTL, które samo optymalizuje umiejscowienie danych. Uruchomienie defragmentacji wymusza pełne przeczytanie dysku i reorganizację bloków — to <strong>zużywa cykle zapisu NAND</strong> (krok w stronę końca żywotności), trwa 20–60 minut i <strong>nie daje żadnej korzyści wydajnościowej</strong>.</p>
+<p>Windows 10/11 <strong>rozpoznają SSD i robią TRIM, nie defragmentację</strong>. Jeśli kiedyś widzisz okno „defragmentacja trwa&quot;, to Twój dysk nie jest rozpoznany jako SSD (np. jest w obudowie USB) albo ktoś uruchomił ręcznie. <strong>Odpowiedź: uruchom Optymalizację raz w tygodniu. Windows zrobi TRIM. Zignoruj.</strong></p>
+<p><strong>Trzy rzeczy, które realnie wpływają na NVMe:</strong></p>
+<ol>
+<li><strong>Tryb „Aggressive power management&quot;:</strong> Menedżer urządzeń → kontrolery/dyski → NVMe → Właściwości → <strong>Zaawansowane</strong>. Ustaw <strong><code>Disabled</code> (0)</strong> na desktopie. To wyłącza usypianie kontrolera, które powoduje opóźnienie pierwszego odczytu. (Nie to samo co selective suspend USB z 4.3 — to dwa osobne mechanizmy.)</li>
+<li><strong>Wyłączenie skanowania AV dla folderu z grą.</strong></li>
+<li><strong>Priorytety I/O</strong> — patrz niżej.</li>
+</ol>
+<h3 id="priorytety-i-o-pomijane-przez-99-ludzi">Priorytety I/O — pomijane przez 99% ludzi</h3>
+<p>Mechanizm niezależny od priorytetów CPU: proces ma priorytet I/O 0–6 (0 = najwyższy). Proces o wyższym priorytecie ma <strong>preferowany dostęp do dysku</strong> niezależnie od tego, czy drugi proces czyta, czy zapisuje.</p>
+<p>GUI: Menedżer zadań → zakładka <strong>Szczegóły</strong> → prawy przycisk → Ustaw priorytet → <strong>Wysoki</strong> dla procesu gry i <code>System</code>. <strong>Niski</strong> dla indeksowania wyszukiwania i <code>MsMpEng</code> (Defender).</p>
+<p><strong>Ważne ograniczenie:</strong> to ustawienie <strong>nie jest trwałe</strong> — znika po restarcie. Dlatego trwałe rozwiązanie wymaga skryptu startowego, który ustawia priorytety po zalogowaniu.</p>
+<p><strong>Ustawienie MMCSS dla gier</strong> (elegantsze, bo działa na poziomie harmonogramowania i jest respektowane przez system, a nie tylko na powierzchni):</p>
+<pre data-lang="powershell"><code>$p = &quot;HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Games&quot;
+Set-ItemProperty -Path $p -Name &quot;GPU Priority&quot;       -Value 8 -Type DWord
+Set-ItemProperty -Path $p -Name &quot;Scheduling Category&quot; -Value 10 -Type DWord
+Set-ItemProperty -Path $p -Name &quot;Priority&quot;            -Value 6 -Type DWord
+Set-ItemProperty -Path $p -Name &quot;SFIO Priority&quot;       -Value 2 -Type DWord</code></pre>
+<h3 id="cache-shaderow-i-dlaczego-go-nie-usuwamy-przed-gra">Cache shaderów — i dlaczego go NIE usuwamy przed grą</h3>
+<p><strong>To najczęstszy błąd w poradnikach.</strong> Logika „cache shaderów to śmieci, usuńmy&quot; jest błędna co do podstaw mechanizmu.</p>
+<p><strong>Shader</strong> to mały program GPU wykonujący operację na pikselach. Karta <strong>kompiluje</strong> go do kodu maszynowego — a to jest wolne: od kilku milisekund do kilkudziesięciu. Lokalizacje cache: <code>%LOCALAPPDATA%\D3DSCache</code>, <code>%LOCALAPPDATA%\NVIDIA\DXCache</code>, <code>...\GLCache</code>, <code>%LOCALAPPDATA%\AMD\DxCache</code>.</p>
+<p><strong>Co się dzieje po usunięciu:</strong> GPU nie ma skompilowanych shaderów, więc kompiluje je <strong>w locie podczas gry</strong>, blokując całą klatkę przy każdym nowym materiale. Efekt: <strong>pierwsze 2–10 minut gry to micro-stutter w klastrach.</strong> Nie da się tego uniknąć. Po 10 minutach wszystko jest skompilowane.</p>
+<p><strong>To jest dokładnie odwrotność tego, czego chcesz.</strong> Usunięcie cache przynosi 10 minut lagów — strata pewna i czysta.</p>
+<p><strong>Kiedy usuwanie JEST uzasadnione:</strong></p>
+<ul>
+<li><strong>Błąd sterownika / artefakty</strong> (czarne modele, różowe textury) — klasyczny objaw uszkodzonego shadera. Usunięcie = naprawa.</li>
+<li><strong>Aktualizacja sterownika</strong> — sterowniki zwykle same czyścią cache, ale nie zawsze.</li>
+<li><strong>Brak miejsca na dysku</strong> — cache potrafi zajmować 200 MB – 10 GB.</li>
+</ul>
+<pre data-lang="cmd"><code>:: Zamykaj gry i klienta Steam/Epic. W tygodniu, gdy nie planujesz sesji.
+del /q /f /s &quot;%LOCALAPPDATA%\D3DSCache\*&quot; 2&gt;nul
+del /q /f /s &quot;%LOCALAPPDATA%\NVIDIA\DXCache\*&quot; 2&gt;nul
+del /q /f /s &quot;%LOCALAPPDATA%\NVIDIA\GLCache\*&quot; 2&gt;nul
+del /q /f /s &quot;%LOCALAPPDATA%\AMD\DxCache\*&quot; 2&gt;nul</code></pre>
+<p>Cache jest odtwarzalny — usunięcie nie uszkodzi gry ani sterownika. <strong>Rekomendacja Tweakify: robimy to tylko przy (a) i (b), i zawsze informujemy, że następne 2–10 minut gry będzie miało mikro-stutter. Decyzja należy do klienta.</strong></p>
+<h3 id="podsumowanie-sekcji-1">Podsumowanie sekcji 1</h3>
+<div class="table-wrap"><table><thead><tr><th>Czynność</th><th>Efekt</th><th>Rekomendacja</th></tr></thead><tbody><tr><td>Czyszczenie Temp</td><td>~0 FPS, porządek</td><td>Raz na jakiś czas</td></tr><tr><td>Usuwanie Prefetch ręcznie</td><td>0 FPS</td><td><strong>Nie</strong></td></tr><tr><td>Włączenie TRIM</td><td>Kluczowe dla SSD</td><td>Sprawdź</td></tr><tr><td>Defragmentacja SSD</td><td>Szkodliwa</td><td><strong>Nigdy</strong></td></tr><tr><td>Aggressive power mgmt NVMe → Disabled</td><td>Mniejsze opóźnienie I/O</td><td>Tak, na desktopie</td></tr><tr><td>Wyłączenie skanowania AV dla gry</td><td>2–8% FPS, mniej DPC</td><td>Tak</td></tr><tr><td>Priorytety I/O + MMCSS</td><td>Lepsze ładowanie, wyższe 1% Low</td><td>Tak</td></tr><tr><td>Czyszczenie cache shaderów</td><td><strong>Pogarsza</strong> (10 min stutteru)</td><td>Tylko przy błędach</td></tr><tr><td>„Czyszczenie rejestru&quot;</td><td>Ryzyko bez zysku</td><td><strong>Nigdy</strong></td></tr></tbody></table></div>
+<h2 id="4-2-inzynieria-okien-systemu-dwm-i-swapeffect">4.2 Inżynieria okien systemu: DWM i SwapEffect</h2>
+<p><strong>Ostrzeżenie.</strong> To jedna z nielicznych sekcji, gdzie <strong>konkretne wartości nie mają jednoznacznego znaczenia we wszystkich konfiguracjach.</strong> Klucz jest interpretowany przez sterownik karty, a sterownik jest inny dla NVIDIA, AMD i Intela i zmienia się między wersjami. <strong>Dlatego stosujemy metodę pomiarową: ustawiamy → mierzymy → decydujemy.</strong></p>
+<p><strong>Dlaczego flip jest szybszy:</strong> w modelu BLIT aplikacja renderuje do bufora, a system <strong>kopiuje</strong> go do bufora ekranu — setki MB/s przepustowości pamięci i obciążenie procesora. W modelu FLIP system <strong>zamienia wskaźniki</strong> między dwoma buforami: operacja trwa mikrosekundy zamiast milisekund.</p>
+<p><strong>Dlaczego nie każda go używa:</strong> flip wymaga obsługi DWM i sterownika; starsze Windowsy były mniej niezawodne; tryby okienkowe i hybrydowe (laptop z dwiema GPU) go omijają. <strong>To jest miejsce, w którym warto sprawdzić, co robi Twoja gra.</strong></p>
+<h3 id="klucz-dwmswapeffect">Klucz <code>DwmSwapEffect</code></h3>
+<pre data-lang=""><code>HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers</code></pre>
+<p>Wartość <code>DwmSwapEffect</code> (DWORD). Interpretowane wartości:</p>
+<div class="table-wrap"><table><thead><tr><th>Wartość</th><th>Znaczenie wg powszechnej praktyki</th></tr></thead><tbody><tr><td><code>1</code></td><td>Disable — wymuszenie trybu legacy / blit</td></tr><tr><td><code>2</code></td><td>Enable — wymuszenie flipu dla wspomaganych gier</td></tr><tr><td><code>3</code></td><td>Enable (DWM managed)</td></tr><tr><td><code>4</code></td><td>Disable DWM effects (force blit)</td></tr><tr><td><code>5</code></td><td><strong>Force GPU composition (force flip)</strong></td></tr></tbody></table></div>
+<blockquote><p><strong>Uwaga:</strong> wartości <code>1</code>/<code>4</code> i <code>2</code>/<code>3</code> są w różnych źródłach interpretowane różnie; historia tego klucza jest długa i pełna niejasności, a starsze sterowniki NVIDIA interpretowały <code>2</code> i <code>3</code> inaczej niż obecne. Dlatego zamiast cytować „autorytatywne&quot; tabelki, <strong>mierzymy.</strong> Pokrewny klucz: <code>DwmSwapEffectPriority</code>.</p></blockquote>
+<p><strong>Nowsze sterowniki NVIDIA mają własne mechanizmy flipu, które mogą nadpisywać</strong> ustawienie z rejestru. Dlatego testowanie jest obowiązkowe.</p>
+<h3 id="procedura-testowa">Procedura testowa</h3>
+<pre data-lang="cmd"><code>:: 1. Odczytaj i ZANOTUJ aktualną wartość
+reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v DwmSwapEffect
+
+:: 2. Ustaw flip model
+reg add &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v DwmSwapEffect /t REG_DWORD /d 5 /f
+
+:: 3. Restart jest WYMAGANY (klucz jest czytany przy inicjalizacji podsystemu graficznego)
+shutdown /r /t 0
+
+:: 4. Powtórz pomiar w 10-minutowym boju, porównaj 1% Low i frame time 99,9%</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Wynik</th><th>Decyzja</th></tr></thead><tbody><tr><td>1% Low wzrósł, frame time 99,9% spadł</td><td><strong>Zostaw</strong></td></tr><tr><td>Nic się nie zmieniło</td><td>Sterownik neutralizuje ustawienie; przetestuj inną wartość lub cofnij</td></tr><tr><td>FPS spadły lub artefakty</td><td><strong>Cofnij natychmiast</strong></td></tr></tbody></table></div>
+<p><strong>Przywrócenie wartości domyślnej</strong> (najczystsze cofnięcie — nie zostawia wpisu z „dziwną&quot; wartością):</p>
+<pre data-lang="cmd"><code>reg delete &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v DwmSwapEffect /f
+shutdown /r /t 0</code></pre>
+<h3 id="fullscreen-optimization-fso">Fullscreen Optimization (FSO)</h3>
+<p>Od Windows 10 gra okienkowa zajmująca niemal cały ekran może zostać automatycznie przełączona w tryb pełnoekranowy. <strong>Problemy:</strong> niektóre gry gorzej w FSO niż w borderless, potrafi włączyć V-Sync, powoduje mikro-stutter przy przełączaniu okna.</p>
+<pre data-lang="cmd"><code>reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 2 /f
+reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_DXGIHonorFSEWindowsCompatible /t REG_DWORD /d 1 /f
+reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_HonorUserFSEBehaviorMode /t REG_DWORD /d 1 /f</code></pre>
+<p><strong>Efekt:</strong> gra działa w trybie okienkowym bez FSO — nie daje przyspieszenia, ale <strong>eliminuje mikro-stutter przy alt-tab</strong> i daje przewidywalne zachowanie.</p>
+<p><strong>Prawda o tej sekcji:</strong> <code>DwmSwapEffect</code> daje realny, ale niewielki zysk na nowoczesnych systemach z nowymi sterownikami; na sprzęcie sprzed 2019 roku zyski były znacznie większe. <strong>Najczęstszy realny zysk tej sekcji to nie FPS, a eliminacja mikro-stutteru i stabilizacja frame pacingu.</strong></p>
+<h2 id="4-3-walka-z-input-lagiem-peryferiow">4.3 Walka z input lagiem peryferiów</h2>
+<h3 id="selective-suspend-mechanizm-dlaczego-szkodzi">Selective Suspend — mechanizm, dlaczego szkodzi</h3>
+<p>Opisany w specyfikacji USB 2.0: gdy urządzenie nie wykazuje aktywności, kontroler <strong>wstrzymuje port</strong> — wyłącza taktowanie i zasilanie linii danych. Przy nadejściu aktywności kontrolor musi wykryć sygnał, <strong>obudzić port</strong>, <strong>zrestartować urządzenie</strong> i przesłać pierwszy raport.</p>
+<p><strong>Latencja wstrzymania w specyfikacji: typowo 10 ms, maksymalnie 250 ms.</strong> W praktyce na desktopie obudzenie trwa 0,5–3 ms — prawie niezauważalne, ale w e-sporcie zabiera realną przewagę. W praktyce wiele sterowników ma też <strong>błędy</strong>, przez które obudzenie trwa znacznie dłużej albo urządzenie zawiesza się i wymaga resetu fizycznego.</p>
+<p><strong>Dlaczego to jest włączone domyślnie?</strong> Producenci OEM muszą spełniać wymagania ENERGY STAR i EPEAT dotyczące zużycia w trybie czuwania. <strong>Dlaczego to szkodzi na desktopie?</strong> Bo podłączony do zasilania sieciowego <strong>nie ma żadnego powodu oszczędzać energii portu.</strong></p>
+<h3 id="wylaczanie-menedzer-urzadzen">Wyłączanie — Menedżer urządzeń</h3>
+<p><code>devmgmt.msc</code> → <strong>Kontrolery uniwersalnej magistrali szeregowej USB</strong>.</p>
+<p><strong>Ścieżka A — urządzenia:</strong> rozwiń gałąź, kliknij prawym na <strong>swoją mysz</strong> (zwykle są dwa wpisy: HID i mysz z dodatkowymi przyciskami), potem klawiaturę i kontroler gamedev → <strong>Właściwości → zakładka „Zarządzanie energią&quot;</strong> → <strong>odznacz</strong> „Zezwalaj komputerowi na wyłączenie tego urządzenia w celu oszczędności energii&quot; → Zastosuj.</p>
+<p><strong>Ścieżka B — kontrolery:</strong> powtórz dla wpisów typu <strong>„Główny koncentrator USB&quot;</strong>, <strong>„Kontroler hosta USB typu xHCI&quot;</strong>, eHCI, OHCI. Na niektórych systemach zakładka się nie pojawia — wtedy użyj ścieżki C.</p>
+<p><strong>Ścieżka C — powercfg</strong> (alternatywa globalna):</p>
+<pre data-lang="cmd"><code>:: AC = wyłącz (0), DC = wyłącz (0). Na laptopie: DC=2 (zostaw optymalizację na baterii)
+powercfg /setacvalueindex SCHEME_CURRENT SUB_USB 2a737441-1930-4402-8d77-b2bebba308a3 0
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_USB 2a737441-1930-4402-8d77-b2bebba308a3 0
+powercfg /setactive SCHEME_CURRENT</code></pre>
+<p><strong>Weryfikacja stanu:</strong> <code>powercfg /q SCHEME_CURRENT SUB_USB 2a737441-1930-4402-8d77-b2bebba308a3</code></p>
+<h3 id="bluetooth-ukryty-wrog-na-laptopach">Bluetooth — ukryty wróg na laptopach</h3>
+<p>Sterowniki Bluetooth (Intel, Realtek) <strong>wykonują skanowanie w tle</strong> — ciągłe pakiety promocyjne, nawet gdy nie ma podłączonych urządzeń. Te pakiety przechodzą przez stos USB. Generuje to <strong>regularne DPC i mikrostuttering</strong>, a Windows „usprawnia&quot; to oszczędzaniem energii, co dodaje cykle obudzenia.</p>
+<p><strong>Opcja 1:</strong> <code>Menedżer urządzeń</code> → <code>Bluetooth</code> → Właściwości → odznacz „Zezwalaj komputerowi na wyłączenie tego urządzenia&quot;. <strong>Opcja 2 (laptopy z Intelem):</strong> w BIOS-ie wyłącz <strong>Intel Bluetooth TiWiFi</strong>. <strong>Opcja 3:</strong> jeśli używasz dongla USB — przełóż na port USB 2.0.</p>
+<h3 id="polling-rate-i-akceleracja">Polling rate i akceleracja</h3>
+<p>Polling rate ustawiasz w oprogramowaniu producenta (G HUB, Synapse, iCUE, SteelSeries Engine). <strong>Zmiana DPI nie zawsze zmienia polling rate i odwrotnie — sprawdzaj obie wartości po każdej zmianie.</strong> Zweryfikuj pomiarem (np. <code>mouse-rate.com</code>) albo diodą LED w myszy.</p>
+<div class="table-wrap"><table><thead><tr><th>Polling rate</th><th>Zalecenie</th></tr></thead><tbody><tr><td>500 Hz</td><td>Minimum dla e-sportu</td></tr><tr><td><strong>1000 Hz</strong></td><td><strong>Standard — rekomendacja dla 90% graczy</strong></td></tr><tr><td>4000/8000 Hz</td><td>Eksperymentalne: realny zysk mały, obciążenie CPU duże</td></tr></tbody></table></div>
+<p><strong>Wyłącz akcelerację myszy w Windows:</strong> Ustawienia → Bluetooth i urządzenia → Mysz → dodatkowe ustawienia → Opcje dodatkowych przycisków → zakładka „Opcje wskaźnika&quot; → <strong>odznacz „Włącz USTAWIENIE PRĘDKOŚCI wskaźnika&quot;</strong>.</p>
+<p>To jest <strong>softwareowa predykcja ruchu</strong> w sterowniku systemowym, która interweniuje w raporty myszy. W grach FPS to katastrofa: <strong>celownik pójdzie dalej niż powinieneś.</strong> Nowoczesne silniki używają Raw Input, który tę ochronę daje; starsze tytuły na DirectInput — nie.</p>
+<h3 id="oprogramowanie-peryferiow-w-tle">Oprogramowanie peryferiów w tle</h3>
+<p>G HUB, Synapse, iCUE, Engine, Armoury Crate: usługa w tle, wstrzykiwanie DLL-i do procesów (w tym do gier), regularne odpytywanie sprzętu przez USB w trybie użytkownika, globalne hooki, aktualizacje w tle. Każdy element to potencjalne źródło obciążenia, mikrostutteringu, DPC i konfliktu z filtrem myszy.</p>
+<p><strong>Rekomendacja:</strong> konfigurujesz i zamykasz aplikację główną przed grą. Przy mikrostutteringu lub słabym sprzęcie — <strong>całkowicie odinstaluj program w tle</strong> i pracuj na ustawieniach zapisanych w pamięci urządzenia.</p>
+<h2 id="4-4-plan-zasilania-najczesciej-pomijany-i-najwyzej-oplacalny-element">4.4 Plan zasilania — najczęściej pomijany i najwyżej opłacalny element</h2>
+<p><strong>Jeśli miałbyś zmienić jedną rzecz w swoim systemie — zrób to tutaj.</strong></p>
+<h3 id="dlaczego-zrownowazony-szkodzi">Dlaczego „Zrównoważony&quot; szkodzi</h3>
+<p><strong>a) Pułapka 99%.</strong> Maksymalny stan procesora to <strong>99%, nie 100%</strong>. Regulator w CPU „widzi&quot;, że nigdy nie osiąga 100%, i aktywnie trzyma rdzenie poniżej maksymalnego boostu. Po zmianie na 100% wielu użytkowników raportuje <strong>+5–10%</strong> w grach CPU-bound na Ryzenach.</p>
+<p><strong>b) EPP (Energy Performance Preference).</strong> Parametr 0–255, gdzie 0 = maksymalna wydajność. Domyślnie w planie Zrównoważonym to <strong>40–128</strong>. Mechanizm jest anty-intuicyjny: przy wysokim EPP procesor <strong>celowo</strong> nie wchodzi w boost przy krótkich, intensywnych skokach obciążenia — a scenariusz gry to <strong>dokładnie taki wzorzec</strong>.</p>
+<p><strong>c) Rezerwa rdzeni.</strong> Windows rezerwuje 1 rdzeń dla systemu; przy obciążeniu wszystkich rdzeni zabiera go z puli aplikacji, powodując skoki wydajności.</p>
+<p><strong>d) PCIe Link State Power Management.</strong> Gdy GPU nie pracuje, łącze jest uspijane i potrzebuje czasu na wybudzenie — objawia się jako opóźnienie pierwszych klatek po wejściu do walki.</p>
+<h3 id="aktywacja-planu">Aktywacja planu</h3>
+<p>Windows 11 <strong>ukrywa plan „Najwyższa wydajność&quot; (Ultimate Performance)</strong> domyślnie:</p>
+<pre data-lang="cmd"><code>:: Utwórz go z ukrytego szablonu
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+
+:: Sprawdź GUID w `powercfg /list`, potem aktywuj:
+powercfg /setactive &lt;GUID-twojego-planu&gt;
+
+:: Alternatywa (plan widoczny, bez tworzenia nowego):
+powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c   :: &quot;Wysoka wydajność&quot;</code></pre>
+<p><strong>Uwaga dla laptopów:</strong> plan „Najwyższa wydajność&quot; <strong>wyłącza stan uśpienia na baterii</strong> — laptop zużywa baterię w mniej niż godzinę. Na laptopach użyj „Wysoka wydajność&quot; + dostrojenie ręczne.</p>
+<h3 id="dostrojenie-parametrow-ac-zasilacz-dc-bateria">Dostrojenie parametrów (AC = zasilacz, DC = bateria)</h3>
+<p><strong>Desktop (AC):</strong> min. stan procesora <strong>100%</strong>, max <strong>100%</strong>, EPP <strong>0</strong>, boost mode <strong>Aggressive</strong>, rezerwa rdzeni <strong>0</strong>, cooling policy <strong>Active</strong>.</p>
+<p><strong>Laptop:</strong> AC — min 5%, max 100%, EPP 20–40, rezerwa 1 rdzeń; DC — max 90%, EPP 80+ (oszczędzanie).</p>
+<pre data-lang="cmd"><code>powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFEPP 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 100
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 90
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR SYSCOOLPOL 1
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR CPMINCORES 0
+powercfg /setactive SCHEME_CURRENT     :: BEZ tego zmiany nie zaczynają obowiązywać</code></pre>
+<h3 id="c-states">C-states</h3>
+<p><strong>C-states</strong> to mechanizm oszczędzania energii procesora. C0 = praca, C6 = głęboki sen z wyłączonymi zegarami. Obudzenie z C6 trwa <strong>dziesiątki mikrosekund</strong> — przy budżecie 4,17 ms (240 Hz) to jest realne i mierzalne. Więcej C-states = mniej ciepła w idle, <strong>większe opóźnienie wybudzenia</strong>.</p>
+<p><strong>Na desktopie podłączonym do zasilania C-states są bezużyteczne.</strong> Na laptopie dyskusyjne (krótsza bateria).</p>
+<p><strong>Wyłączanie:</strong> najlepiej <strong>w BIOS-ie</strong> (<code>Advanced → CPU Configuration → C-States</code> / <code>Tweaker → C-State Support</code>), gdzie jest bezpieczniejsze. Z systemu: <code>Menedżer urządzeń</code> → rozwiń <strong>Procesory</strong> → Właściwości → <strong>Zarządzanie energią</strong> → odznacz „Zezwalaj komputerowi na wyłączenie tego urządzenia&quot;.</p>
+<p><strong>Ostrzeżenie:</strong> bezpośrednia manipulacja stanami C w rejestrze może powodować <strong>zawieszanie systemu</strong> na niektórych płytach. Dlatego robimy to w BIOS-ie.</p>
+<p><strong>Zysk planu zasilania i C-states to najwyższa zwrotna pojedyncza zmiana w całym e-booku: +5–15% FPS z planem, +1–4% 1% Low z C-states.</strong></p>
+<h2 id="4-5-tryb-gry-hags-i-nadzor">4.5 Tryb gry, HAGS i nadzór</h2>
+<p><strong>Game Mode</strong> — gdy gra jest rozpoznana, system wstrzymuje wybrane usługi aktualizacji <strong>podczas rozgrywki</strong>, ustawia priorytety I/O procesu gry na Wysoki, wyłącza nagrywanie w tle i resetuje QoS. <strong>Mechanizm krytyczny: wstrzymanie usług aktualizacji i diagnostyki na czas gry.</strong></p>
+<pre data-lang="cmd"><code>reg add &quot;HKLM\SOFTWARE\Microsoft\GameBar&quot; /v AutoGameModeEnabled /t REG_DWORD /d 1 /f
+reg add &quot;HKLM\SOFTWARE\Microsoft\GameBar&quot; /v AllowAutoGameMode /t REG_DWORD /d 1 /f
+
+:: Game DVR OFF (nagrywanie w tle działa nawet, gdy go nie używasz)
+reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_Enabled /t REG_DWORD /d 0 /f
+reg add &quot;HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR&quot; /v AppCaptureEnabled /t REG_DWORD /d 0 /f</code></pre>
+<p><strong>Jeśli używasz Game Bar do nagrywania rozgrywki — nie wyłączaj go</strong>; skonfiguruj go tak, żeby nagrywał tylko w grze. Do nagrywania używaj OBS/ShadowPlay, które robią to samo lepiej i wydajniej.</p>
+<p><strong>HAGS</strong> (Hardware-Accelerated GPU Scheduling) pozwala zarządzać kolejką pracy GPU na poziomie sprzętowego procesora GPU, zamiast w systemie operacyjnym. <strong>Kontrowersja: HAGS nie jest jednoznacznie korzystny</strong> — jedni raportują +5–10%, inni pogorszenie i mikro-stutter. <strong>Testuj oba i mierz 1% Low.</strong></p>
+<pre data-lang="cmd"><code>reg add &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v HwSchMode /t REG_DWORD /d 2 /f   :: ON
+reg delete &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v HwSchMode /f                  :: przywróć domyślne
+shutdown /r /t 0</code></pre>
+<div class="table-wrap"><table><thead><tr><th>Zmiana</th><th>Zysk</th><th>Ryzyko</th><th>Rekomendacja</th></tr></thead><tbody><tr><td>Game Mode ON</td><td>+2–5% FPS</td><td>Niskie</td><td><strong>Zalecane</strong></td></tr><tr><td>Game DVR OFF</td><td>Mniej CPU/dysku w tle</td><td>Niskie</td><td><strong>Zalecane</strong></td></tr><tr><td>HAGS ON</td><td>+0–10% FPS (lub −5%)</td><td>Niskie</td><td><strong>Testuj obie</strong></td></tr><tr><td>Memory Integrity OFF</td><td>+0–8% FPS</td><td><strong>Średnie</strong></td><td>Świadoma decyzja</td></tr></tbody></table></div>
+<h2 id="4-6-bios-pamiec-hpet-smt-i-undervolting">4.6 BIOS: pamięć, HPET, SMT i undervolting</h2>
+<p><strong>XMP/EXPO</strong> — patrz 3.2. Znajdź w BIOS-ie <code>Overclocking</code> / <code>AI Tweaker</code> / <code>Extreme</code> → ustaw <strong><code>Profile 1</code></strong> (nie <code>Profile 2</code>, który jest trybem oceny trwałości producenta). Po restarcie <strong>weryfikuj aktywną konfigurację</strong> (<code>CPU-Z → Memory</code>) i <strong>przetestuj stabilność</strong>. Jeśli nie przechodzi — obniż częstotliwość o jeden krok, spróbuj zmniejszyć napięcie, dodaj napięcie SoC (na Ryzenach często bardzo pomaga), w ostatejności wróć do JEDEC.</p>
+<p><strong>HPET kontra TSC.</strong> TSC to licznik wbudowany w procesor, częstotliwość stała. HPET to układ na płycie głównej, 10 MHz, z odczytem przez MMIO. Legenda „HPET = lepsze FPS&quot; pochodzi z czasów Windows XP/7. <strong>Na nowoczesnych procesorach (Zen 3+, Intel 12+) TSC jest na tyle dobry, że HPET często daje gorsze wyniki</strong>, szczególnie w opóźnieniach wejścia. <strong>Rekomendacja: domyślnie NIE włączamy HPET — mierzymy z i bez.</strong></p>
+<pre data-lang="cmd"><code>bcdedit /set useplatformclock false    :: false = TSC (domyślnie zalecane)
+bcdedit /deletevalue {current} useplatformclock   :: przywrócenie</code></pre>
+<p><strong>Unikaj <code>useplatformtick</code></strong> — wyłącza platformowy tick timer i może powodować zawieszki na wielu systemach.</p>
+<p><strong>SMT / Hyper-Threading.</strong> Kolejny popularny mit. <strong>Nowoczesne procesory używają SMT efektywnie</strong> — wyłączenie na Ryzenach 5000/7000 często <strong>pogarsza</strong> wydajność o 3–8%. Na Zen 1/2 (4-wątkowe SMT) wyłączenie pomagało o 5–10%. <strong>Na nowoczesnych procesorach zostawiaj włączony. Zmień i zmierz, jeśli chcesz sprawdzić.</strong></p>
+<p><strong>Undervolting — jedyna podkręcenie, które rekomendujemy domyślnie.</strong> Procesor dostaje napięcie fabryczne z dużym marginesem dodanym na najgorszy egzemplarz, najgorszą temperaturę i lata. Obniżamy napięcie o offset — procesor pracuje na mniejszym marginesie, wciąż stabilnie. <strong>Mniejsze napięcie → mniejsza moc → mniejsze ciepło → wyższy boost.</strong> Procedura: Ryzen Master → zakładka Undervolt → zacznij od <strong>−50 mV</strong> → wbudowany test stabilności → −100 mV → test → znajdź największe ujemne offset, które przechodzi. <strong>Test musi trwać dłużej niż 30 minut</strong> i obciążać rdzenie CPU, nie tylko GPU. Alternatywnie Curve Optimizer w BIOS-ie (−10, −20, −30 na wszystkich rdzeniach, krok po kroku). <strong>Jeśli test nie przechodzi — cofnij.</strong></p>
+<div class="table-wrap"><table><thead><tr><th>Zmiana BIOS</th><th>Zysk</th><th>Ryzyko</th></tr></thead><tbody><tr><td>XMP/EXPO ON</td><td><strong>+5–15%</strong></td><td>Niskie</td></tr><tr><td>C-states OFF</td><td>+1–4% 1% Low</td><td>Niskie</td></tr><tr><td>HPET ON</td><td>−5% do +3%</td><td>Niskie</td></tr><tr><td>SMT OFF</td><td>−5% do +8%</td><td>Niskie</td></tr><tr><td>Undervolting</td><td>+3–10% FPS, −10–20 °C</td><td>Niskie</td></tr><tr><td>Overclocking CPU</td><td>+5–20%</td><td>Średnie</td></tr></tbody></table></div>
+<h2 id="4-7-siec-dns-mtu-nagle-i-firewalle">4.7 Sieć: DNS, MTU, Nagle i firewalle</h2>
+<p><strong>Optymalizacja sieci ma inną naturę.</strong> Pingu i jitteru nie da się „usunąć&quot; — da się poprawić to, co jest w Twojej kontroli. Liczą się trzy rzeczy: <strong>ping</strong> (średni RTT), <strong>jitter</strong> (wahania — <strong>ważniejszy dla jakości rozgrywki niż średni ping</strong>) i <strong>packet loss</strong>. Gracz reagujący na różnych stymulacjach jest gorszy niż gracz z przewidywalnym opóźnieniem.</p>
+<p><strong>DNS</strong> — domyślny DNS operatora bywa throttlowany, szczególnie w szczycie. Cloudflare <code>1.1.1.1</code>, Quad9 <code>9.9.9.9</code> (szybki + filtruje malware), Google <code>8.8.8.8</code>. Włącz też <strong>DNS over HTTPS</strong> w Ustawieniach.</p>
+<pre data-lang="cmd"><code>netsh interface ip set dns &quot;name=Ethernet&quot; static 1.1.1.1
+netsh interface ip set dns &quot;name=Ethernet&quot; static 1.0.0.1 primary</code></pre>
+<p><strong>Zmiana DNS nie zmienia pingu do serwera gry</strong> — wpływa tylko na rozwiązywanie nazw. Realny efekt: 5–50 ms mniej opóźnienia przy łączeniu, zero zmian w rozgrywce. To jest częsty błąd pojęciowy.</p>
+<p><strong>MTU</strong> — 1500 bajtów standardowo. Jeśli pakiet jest większy niż MTU na jakimkolwiek routerze w trasie, zostaje <strong>pofragmentowany</strong> (drogo, zwiększa ryzyko utraty). Path MTU Discovery często nie działa, bo routery ignorują ICMP. <strong>Rozwiązanie: ustaw MTU niżej — ale zmierz, nie zgaduj.</strong></p>
+<pre data-lang="cmd"><code>ping 8.8.8.8 -f -l 1472   :: 1472 + 28 nagłówka = 1500
+ping 8.8.8.8 -f -l 1464
+ping 8.8.8.8 -f -l 1452   :: pierwsza wartość BEZ utraty = bezpieczna MTU
+netsh interface ipv4 set subinterface &quot;Ethernet&quot; mtu=1472 store=persistent</code></pre>
+<p><strong>MTU dotyczy konkretnej trasy</strong> — różne serwery = różne trasy. Ustawienie za niskie zmniejsza przepustowość, nie zmienia pingu; za wysokie powoduje fragmentację.</p>
+<p><strong>Nagle's Algorithm</strong> to starszy algorytm TCP, który <strong>wstrzymuje kolejne małe pakiety</strong> do potwierdzenia. Pakiety głosowe i pozycje gracza są małe, więc Nagle dodaje <strong>kilkadziesiąt milisekund</strong>. Rozwiązanie — wyłącz (w panelu adaptera: „Zaawansowane → Wyłącz Nagle'a&quot;, albo rejestrem):</p>
+<pre data-lang="cmd"><code>:: GUID interfejsu: netsh interface ipv4 show interfaces
+reg add &quot;HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{GUID}&quot; /v TcpAckFrequency /t REG_DWORD /d 1 /f
+reg add &quot;HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{GUID}&quot; /v TCPNoDelay /t REG_DWORD /d 1 /f</code></pre>
+<p><strong>Efekt: mniejszy jitter w transmisji głosowej. Efekt na ping: zero</strong> — Nagle nie wpływa na propagację, tylko na opóźnienie wysyłania.</p>
+<p><strong>Autotuning TCP: nie ruszaj tego, co działa dobrze.</strong> Domyślne <code>normal</code> jest poprawne; wyłączenie RSS jest <strong>błędem</strong> (pozwala rozłożyć obciążenie na wiele rdzeni i zmniejsza jitter). Heuristics wyłącz tylko przy <strong>dużym opóźnieniu i dużej przepustowości</strong> (fiber 1 Gbps transatlantycki) — na typowym polskim łączu efekt jest minimalny.</p>
+<pre data-lang="cmd"><code>netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global rss=enabled
+netsh int tcp set global congestionprovider=dctcp   :: lepszy na łączach domowych
+netsh interface tcp set heuristics disabled         :: tylko przy dużym RTT+przepustowości</code></pre>
+<p><strong>Reguły firewalla dla gier</strong> — <code>dir=out action=allow</code> dla konkretnego programu <strong>nie jest wyłączeniem firewalla</strong> (nie otwiera portów na świat), tylko pozwala na ruch wychodzący bez inspekcji. Mniejsze opóźnienie wychodzących pakietów.</p>
+<pre data-lang="cmd"><code>netsh advfirewall firewall add rule name=&quot;Tweakify - VALORANT&quot; dir=out action=allow program=&quot;C:\Riot Games\VALORANT\live\VALORANT.exe&quot; enable=yes profile=any</code></pre>
+<p><strong>Czego NIE robimy:</strong> nie zmieniamy MAC ani TTL (brak wpływu), nie używamy „ping boosterów&quot; (placebo), nie obiecujemy „−50 ms pingu&quot; i nie włączamy „Network Throttling Disable&quot; bez wyjaśnienia ryzyka. Realistyczne oczekiwania: <strong>5–20 ms redukcji pingu, 20–50% redukcji jitteru</strong> — więcej zależy od operatora i trasy, a nie od naszych ustawień.</p>
+<h2 id="4-8-checklista-20-punktow-tweakify">4.8 Checklista 20 punktów TWEAKIFY</h2>
+<p>Kolejność zmian. Zawsze z 4.0 i z pomiarem.</p>
+<p><strong>Fundament (największy zysk):</strong></p>
+<ul>
+<li>1. Punkt przywracania + eksport kluczy rejestru</li>
+<li>2. Plan zasilania → Najwyższa wydajność</li>
+<li>3. Maksymalny stan procesora <strong>100%</strong> (nie 99%) · 4. EPP = <strong>0</strong> · 5. Boost = <strong>Aggressive</strong></li>
+<li>6. <strong>XMP/EXPO włączone</strong> + test stabilności pamięci</li>
+</ul>
+<p><strong>Wejście:</strong></p>
+<ul>
+<li>7. Polling rate <strong>1000 Hz</strong> (zweryfikowany)</li>
+<li>8. Selective suspend <strong>off</strong>: mysz, klawiatura, kontrolery USB</li>
+<li>9. Akceleracja myszy <strong>off</strong> · 10. Program peryferiów wyciszony lub odinstalowany</li>
+<li>11. Bluetooth selective suspend <strong>off</strong> (lub moduł wyłączony)</li>
+</ul>
+<p><strong>Wyświetlanie i GPU:</strong></p>
+<ul>
+<li>12. Game Mode ON, Game DVR OFF</li>
+<li>13. HAGS przetestowany w obie strony (zmierz 1% Low)</li>
+<li>14. <code>DwmSwapEffect</code> przetestowany — zmierz, oceń, ewentualnie cofnij</li>
+<li>15. V-Sync <strong>ON</strong> gdy G-Sync/FreeSync ON · 16. Limit FPS do 3× refresh</li>
+</ul>
+<p><strong>Stabilność i sieć:</strong></p>
+<ul>
+<li>17. Priorytety I/O (gra = Wysoki, tło = Niski) · 18. MMCSS dla Games</li>
+<li>19. DNS → Cloudflare/Quad9 + DoH</li>
+<li>20. Nagle off + TcpAckFrequency + reguły firewalla dla gier</li>
+</ul>
+<p><strong>Bonus:</strong> undervolting z testem stabilności, C-states off w BIOS-ie, Memory Integrity off (świadoma decyzja), MTU dostrojony do serwera.</p>
+<p><strong>Nie rób wszystkich 20 naraz.</strong> Rób po 2–3, mierz, notuj. Zmiana 20 ustawień bez pomiaru jest <strong>gorsza niż brak zmian</strong>, bo nie wiesz, co zadziałało.</p>
+<hr>
+<h1 id="rozdzial-5-filozofia-i-przyszlosc-tweakify" class="chapter chapter--part">ROZDZIAŁ 5 — FILOZOFIA I PRZYSZŁOŚĆ TWEAKIFY</h1>
+<h2 id="5-1-dla-graczy-od-graczy">5.1 Dla graczy. Od graczy.</h2>
+<p><strong>„Dla graczy&quot;</strong> — oznacza, że każda decyzja techniczna jest podejmowana z perspektywy gracza, nie administratora systemu. Optymalizujemy FPS, nie „ogólną wydajność&quot;. Bezpieczeństwo jest ważne, ale nie kosztem rozgrywki. Gracz nie ma czasu na analizę — dlatego robimy to z Tobą, na Twoim ekranie. Gracz musi rozumieć, co się dzieje z jego sprzętem — dlatego ten e-book istnieje.</p>
+<p><strong>„Od graczy&quot;</strong> — oznacza, że jesteśmy częścią tej samej społeczności. Na Discordzie omawiamy sprzęt, testy stabilności i nieznane funkcje sterowników. To jest społeczność techniczna, nie helpdesk korporacji.</p>
+<p><strong>Czego NIE jesteśmy.</strong> Nie jesteśmy „magicznym programem&quot; — takie nie istnieją, a te, które udają, psują systemy. Nie jesteśmy gwarantem określonego wyniku FPS, bo nie istnieje komputer, na którym można to zagwarantować; <strong>jesteśmy gwarantem metody i wykonanej pracy</strong>. Nie pracujemy bez Twojej zgody. Nie sprzedajemy placebo: jeśli mówimy, że coś zrobimy, to zmierzymy efekt, a jeśli nie ma efektu — powiemy „nie dało wyniku&quot; i <strong>wycofamy zmianę</strong>.</p>
+<p><strong>To jest różnica między marką, która rośnie, a marką, która zostaje zbanowana w ciągu tygodnia.</strong></p>
+<h2 id="5-2-dozywotnia-opieka-serwisowa">5.2 Dożywotnia opieka serwisowa</h2>
+<p><strong>Kontekst:</strong> optymalizacja nie jest nieaktualizowalna. Windows się aktualizuje, sterowniki się zmieniają, nowe gry mają inne wymaganie.</p>
+<p><strong>Kiedy piszesz do nas (bez dodatkowych opłat):</strong> regresja po aktualizacji; nowa gra wymagająca innego profilu; upgrade sprzętu (konieczne jest przeniesienie i dostosowanie ustawień); wątpliwość merytoryczna („robicie to? powinienem?&quot;); diagnoza problemu, który pojawił się po miesiącu; nowy tytuł na Steamie.</p>
+<p><strong>Czego opieka NIE obejmuje — szczerość przede wszystkim.</strong> Nie przywracamy systemu sprzed 6 miesięcy, jeśli sam coś zmieniłeś (naprawiamy, ale w rozsądnych granicach). Nie naprawiamy uszkodzeń sprzętowych — pomożemy zdiagnozować. Nie „łamiemy&quot; zabezpieczeń systemowych na żądanie — wyjaśnimy ryzyko, a jeśli mimo to chcesz, zrobimy to za Twoją świadomą zgodą, z dokumentacją. <strong>Optymalizacja nie jest gwarancją wyników w zawodach.</strong> Możemy zmniejszyć ping Twojego sprzętu; nie możemy zagwarantować wygranej turnieju.</p>
+<h2 id="5-3-twoj-nastepny-krok-ticket-na-discordzie">5.3 Twój następny krok: ticket na Discordzie</h2>
+<p><strong><a href="https://discord.gg/axtRMB4VCB">Serwer Discord Tweakify</a></strong> → kanał tickietów. Wybierz temat: Optymalizacja FPS / Optymalizacja sieci / Upgrade / Diagnoza.</p>
+<p><strong>Opisz sprzęt i problem.</strong> Nie musisz być techniczny — wystarczy: procesor, karta graficzna, ile RAM-u; w jaką grę grasz i co konkretnie przeszkadza; jaki system operacyjny; <strong>co już próbowałeś zrobić sam</strong> — ten ostatni punkt jest najważniejszy, bo mówi nam, gdzie już sprawdziłeś.</p>
+<p><strong>Rozmowa jest dwustronna.</strong> Masz wiedzę z tego e-booka, więc nie przyjdziemy z lekcją podstaw. Będziemy pytać o <strong>Twój konkretny przypadek</strong>: „masz XMP włączone?&quot;, „jaki masz plan zasilania i max state procesora?&quot;, „odpal LatencyMon na 5 minut gry i wrzuć wykres&quot;.</p>
+<p><strong>Jeśli zdecydujesz się na sesję:</strong> ustawiasz hasło w AnyDesk/TeamViewer, pracujemy <strong>z Tobą na Twoim ekranie</strong>, <strong>zawsze widzisz każdą akcję</strong>, możesz przerwać w każdej chwili. Sesja trwa zwykle <strong>60–90 minut</strong>. Na koniec: benchmarki przed/po, <strong>raport ze zmianami</strong>, punkt przywracania.</p>
+<p><strong>Pakiety:</strong> FPS Boost 40 zł (moc procesora i GPU), Ping Killer 45 zł (sieć), <strong>All-In-One 75 zł</strong> (pełna sesja + dożywotnia opieka). Płatność: BLIK, karta, przelew, PayPal, PSC, krypto, Revolut, Google/Apple Pay. Ustalasz wszystko na Discordzie, bez formularzy.</p>
+<p><strong>Nie musisz od razu zamawiać.</strong> Czasem najcenniejsze jest forum i kilka odpowiedzi na pytania. Wartość optymalizacji nie jest w sesji — jest w <strong>wiedzy, dlaczego ona działa</strong>.</p>
+<h2 id="5-4-zamkniecie">5.4 Zamknięcie</h2>
+<p>Zacząłeś od: <em>„Chcę więcej FPS.&quot;</em> Kończysz na: <em>„Wiem, dlaczego nie mam więcej FPS.&quot;</em> To jest <strong>najważniejsza zmiana, jaką można przejść w optymalizacji systemowej</strong>. Nie zwiększenie FPS o 20 — zrozumienie, dlaczego te 20 ginęło. Bo wiedza się powtarza, a FPS przychodzą i odchodzą.</p>
+<p><strong>Wracając do kontraktu z początku:</strong></p>
+<p><strong>Zero Lag</strong> znaczy: nie obiecuję, że zniknie wszystko, bo fizyka jest nieubita. Obiecuję, że usunę <strong>wszystko, co leży w zasięgu Twojego systemu operacyjnego</strong> — i powiem, co leży poza nim.</p>
+<p><strong>Maximum FPS</strong> znaczy: nie obiecuję 300 FPS z laptopa z i5 ósmej generacji. Obiecuję, że wykorzystam <strong>całą moc, którą Twój sprzęt ma</strong> — i powiem szczerze, jeśli zabrakło Ci sprzętu, a nie ustawień.</p>
+<blockquote><p><strong>Twój sprzęt prawie na pewno nie jest za słaby. Jest za mało wykorzystany. A to jest problem, który da się rozwiązać — mierząc, rozumiejąc i zmieniając tylko to, co pomoże.</strong></p></blockquote>
+<p><strong>Do zobaczenia na Discordzie. Do graczy. Od graczy.</strong></p>
+<p><em>© 2026 Tweakify. Zero Lag. Maximum FPS.</em></p>
+<hr>
+<h1 id="aneks-a-sciagawka-komend" class="chapter chapter--appendix">ANEKS A — ŚCIĄGAWKA KOMEND</h1>
+<p><em>(CMD jako administrator, <strong>po punkcie przywracania</strong>. Podpowiedzi do komend oznaczono komentarzem <code>::</code>.)</em></p>
+<pre data-lang="cmd"><code>:: ── DIAGNOSTYKA ──────────────────────────────────────────────
+ver                                                  :: wersja Windows
+wmic cpu get name,numberofcores,maxclockspeed        :: procesor
+wmic path win32_videocontroller get name,driverversion
+wmic memorychip get capacity,speed,manufacturer,partnumber
+fsutil behavior query DisableDeleteNotify             :: 0 = TRIM on
+powercfg /getactivescheme
+netsh int tcp show global
+
+:: ── REJESTR: ODCZYT ─────────────────────────────────────────
+reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v DwmSwapEffect
+reg query &quot;HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers&quot; /v HwSchMode
+
+:: ── DWM / HAGS ──────────────────────────────────────────────
+reg add &quot;HKLM\...\GraphicsDrivers&quot; /v DwmSwapEffect /t REG_DWORD /d 5 /f
+reg delete &quot;HKLM\...\GraphicsDrivers&quot; /v DwmSwapEffect /f
+reg add &quot;HKLM\...\GraphicsDrivers&quot; /v HwSchMode /t REG_DWORD /d 2 /f
+shutdown /r /t 0
+
+:: ── GAME MODE / DVR / FSO ───────────────────────────────────
+reg add &quot;HKLM\SOFTWARE\Microsoft\GameBar&quot; /v AutoGameModeEnabled /t REG_DWORD /d 1 /f
+reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_Enabled /t REG_DWORD /d 0 /f
+reg add &quot;HKCU\...\CurrentVersion\GameDVR&quot; /v AppCaptureEnabled /t REG_DWORD /d 0 /f
+reg add &quot;HKCU\System\GameConfigStore&quot; /v GameDVR_FSEBehaviorMode /t REG_DWORD /d 2 /f
+
+:: ── MEMORY INTEGRITY ────────────────────────────────────────
+reg add &quot;HKLM\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity&quot; /v Enabled /t REG_DWORD /d 0 /f
+
+:: ── PLAN ZASILANIA ──────────────────────────────────────────
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg /setactive &lt;GUID&gt;
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 100
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFEPP 0
+powercfg /setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2
+powercfg /setacvalueindex SCHEME_CURRENT SUB_USB 2a737441-1930-4402-8d77-b2bebba308a3 0
+powercfg /setactive SCHEME_CURRENT
+
+:: ── SIEC ────────────────────────────────────────────────────
+netsh interface ip set dns &quot;name=Ethernet&quot; static 1.1.1.1
+netsh interface ipv4 set subinterface &quot;Ethernet&quot; mtu=1472 store=persistent
+netsh int tcp set global autotuninglevel=normal
+netsh int tcp set global rss=enabled
+netsh advfirewall firewall add rule name=&quot;Gra&quot; dir=out action=allow program=&quot;C:\gra\gra.exe&quot; enable=yes
+ipconfig /flushdns
+
+:: ── CZYSZCZENIE ─────────────────────────────────────────────
+cleanmgr /sageset:1  &amp;  cleanmgr /sagerun:1
+del /q /f /s &quot;%TEMP%\*&quot; 2&gt;nul
+del /q /f /s &quot;%LOCALAPPDATA%\D3DSCache\*&quot; 2&gt;nul      :: TYLKO przy błędach, NIE przed grą</code></pre>
+<hr>
+<h1 id="aneks-b-swiadczenie-i-zastrzezenia" class="chapter chapter--appendix">ANEKS B — ŚWIADCZENIE I ZASTRZEŻENIA</h1>
+<p><strong>Charakter materiału.</strong> Niniejszy e-book jest materiałem edukacyjnym. Opisuje mechanizmy systemu operacyjnego, sprzętu i protokołów sieciowych w celu podnoszenia świadomości technicznej graczy. Nie jest poradnikiem medycznym, prawnym ani certyfikowanym przewodnikiem Microsoft, NVIDIA ani AMD.</p>
+<p><strong>Zastrzeżenie dotyczące wyników.</strong> Wyniki optymalizacji zależą od: modelu i wieku sprzętu, wersji BIOS-u, wersji sterowników, wersji Windowsa, jakości połączenia sieciowego, stanu termicznego i jakości komponentów (nie wszystkie procesory, pamięci i karty są równe). <strong>Nie gwarantujemy określonego wzrostu FPS, określonego spadku pingu ani wyniku w rozgrywkach.</strong> Wszystkie liczby w tym dokumencie są przykładami opartymi na typowych konfiguracjach i mają charakter poglądowy, nie gwarancji.</p>
+<p><strong>Ryzyko.</strong> Zmiana ustawień systemu, rejestru, BIOS-u lub plików systemowych wiąże się z ryzykiem utraty stabilności, systemu który się nie uruchamia, nieprzewidywalnego zachowania, utraty gwarancji, utraty danych oraz degradacji sprzętu przy nieumiejętnym podkręcaniu. <strong>Tweakify nie ponosi odpowiedzialności za szkody wynikłe z samodzielnego stosowania procedur opisanych w tym dokumencie.</strong> Zalecamy punkt przywracania i kopię zapasową przed każdą zmianą (rozdział 4.0).</p>
+<p><strong>Prawa autorskie.</strong> © 2026 Tweakify. Dokument chroniony prawem autorskim. Udostępnianie w celach edukacyjnych pod warunkiem podania źródła i zachowania integralności treści. Modyfikowanie, dystrybuowanie i wykorzystywanie komercyjne (w tym w „darmowych&quot; programach do optymalizacji) wymagają pisemnej zgody.</p>
+<p><strong>Ten dokument jest bezpłatny.</strong> Niniejszy e-book jest udostępniany nieodpłatnie i nie jest produktem na sprzedaż. Osoba, która go kupiła, weszła w posiadanie towaru nieautoryzowanego. Jeżeli kupiłeś ten dokument, <strong>zgłoś sprzedawcę odpowiednim służbom</strong> oraz <strong>skontaktuj się z Tweakify</strong> na Discordzie (<a href="https://discord.gg/axtRMB4VCB">discord.gg/axtRMB4VCB</a>). W takiej sytuacji:</p>
+<ul>
+<li>przygotujemy materiał dowodowy i pomożemy zgłosić naruszenie,</li>
+<li>podejmiemy kroki przeciwko dystrybutorowi,</li>
+<li>zwrócimy Ci to, co przepadło — <strong>w formie bezpłatnej usługi</strong>.</li>
+</ul>
+<p>Zakazane jest odsprzedawanie, wypakowywanie w paczce „z optymalizatorem&quot;, udostępnianie w zamian za plik, link partnerski prowadzący do płatnej usługi oraz jakiekolwiek czerpanie zysków z tego dokumentu.</p>
+<p><strong>Prywatność.</strong> Tweakify nie zbiera, nie przechowuje i nie udostępnia danych osobowych w związku z korzystaniem z tego e-booka. Nie udostępniamy haseł, kluczy ani adresów IP osobom trzecim, z wyjątkiem przypadków wymaganych przepisami prawa.</p>
+<p><strong>Kontakt.</strong> Discord: <a href="https://discord.gg/axtRMB4VCB">discord.gg/axtRMB4VCB</a> · tweakify.duckdns.org</p>
+<p><em>Dla graczy. Od graczy.</em></p>
+</article>
+
+</body>
+</html>

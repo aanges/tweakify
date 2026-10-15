@@ -493,6 +493,14 @@ html.js-scroll-focus{scroll-behavior:smooth}
 .ticks--hl{color:var(--green-2)!important}
 .ticks--hl::before{content:"♾"}
 .price-note{text-align:center;margin-top:34px;color:var(--dim);font-size:.87rem}
+/* alternatywa pod przyciskiem Starter: czytanie w przegladarce */
+.price__alt{
+  display:block;margin-top:11px;text-align:center;
+  font-size:.79rem;color:var(--dim);
+  border-bottom:1px dashed var(--line-2);padding-bottom:2px;
+  transition:color .2s,border-color .2s;
+}
+.price__alt:hover{color:var(--violet-2);border-color:var(--violet)}
 
 /* ---------- Metody płatności ---------- */
 .pay{

@@ -20,6 +20,7 @@
   if (!fab || !panel || !log || !chips) return; // brak widgetu -> wyjscie po cichu
 
   const DISCORD = 'https://discord.gg/axtRMB4VCB';
+  const EBOOK_PDF = 'ebook/PIERWSZY-KROK-DO-ABSOLUTNEJ-PRZEWAGI.pdf';
 
   /* ---------- Scenariusze ---------- */
 
@@ -192,9 +193,13 @@
     if (opts.cta) {
       const a = document.createElement('a');
       a.className = 'ai__cta';
-      a.href = DISCORD;
-      a.target = '_blank';
-      a.rel = 'noopener';
+      a.href = opts.ctaHref || DISCORD;
+      if (opts.ctaDownload) {
+        a.setAttribute('download', '');          // wymusza pobranie zamiast otwarcia w przegladarce
+      } else {
+        a.target = '_blank';
+        a.rel = 'noopener';
+      }
       a.textContent = opts.cta;
       bubble.appendChild(a);
     }
@@ -234,16 +239,27 @@
     const pkg = PACKAGES[pkgKey];
     clearChips();
 
+    // Starter jest darmowy - prowadzimy od razu do pobrania, nie na Discorda
+    const free = pkgKey === 'starter';
+    const href = free ? EBOOK_PDF : DISCORD;
+    const ctaLabel = free ? 'Pobierz e-book (PDF)' : 'Zamawiam ' + pkg.name + ' na Discordzie';
+    const followUp = free
+      ? 'W środku masz checklistę 20 punktów i ustawienia, które możesz zrobić sam, zanim cokolwiek u nas kupisz. Jak coś będzie niejasne — pytaj na Discordzie.'
+      : 'Napisz na Discordzie — powiemy, ile da się realnie wyciągnąć w Twoim przypadku. Bez zobowiązań.';
+
     const t = typing();
     setTimeout(() => {
       t.remove();
-      addMsg(pkg.why, 'bot', {
+      const el = addMsg(pkg.why, 'bot', {
         reco: true,
         label: 'Polecam: ' + pkg.name,
         price: pkg.price,
-        cta: 'Zamawiam ' + pkg.name + ' na Discordzie'
+        cta: ctaLabel,
+        ctaHref: href,
+        ctaDownload: free
       });
-      addMsg('Napisz na Discordzie — powiemy, ile da się realnie wyciągnąć w Twoim przypadku. Bez zobowiązań.', 'bot');
+      if (free) addMsg('Możesz też od razu napisać na Discordzie — odpowiem na pytania z e-booka.', 'bot');
+      else addMsg(followUp, 'bot');
       showChips([{ label: 'Zacznij od nowa', value: '__restart' }]);
     }, delay(700));
   }
